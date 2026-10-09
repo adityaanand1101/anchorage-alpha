@@ -1,6 +1,16 @@
 import { useEffect, useLayoutEffect, useRef, useState, useCallback } from 'react'
 import Lenis from 'lenis'
-import C from './content.json'
+import C0 from './content.json'
+
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
+const U = p => BASE + p
+const withBase = v => {
+  if (typeof v === 'string') return v.charCodeAt(0) === 47 ? BASE + v : v
+  if (Array.isArray(v)) return v.map(withBase)
+  if (v && typeof v === 'object') { const o = {}; for (const k in v) o[k] = withBase(v[k]); return o }
+  return v
+}
+const C = withBase(C0)
 
 const NAV = [['top','Home'],['about','About us'],['legacy','Legacy'],['team','Team'],['approach','Approach'],['portfolio','Investments'],['investors','Investors'],['contact','Contact']]
 const html = (h) => ({ dangerouslySetInnerHTML: { __html: h } })
@@ -36,7 +46,7 @@ function Count({ html: h }) {
     r = requestAnimationFrame(f); return () => cancelAnimationFrame(r)
   }, [seen])
   if (!m) return <b {...html(h)} />
-  return <b ref={ref} aria-live="polite">{m[1]}{n}<span {...html(m[3])} /></b>
+  return <b ref={ref} aria-live="polite">{m[1]}{n}<span className="sfx" {...html(m[3])} /></b>
 }
 
 /* Hero video: two stacked players, the next one fades in over the last 1.4s of the current one */
@@ -59,8 +69,8 @@ function LoopVideo() {
     }
     raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf)
   }, [])
-  const p = { muted: true, playsInline: true, preload: 'auto', poster: '/video/poster.jpg', 'aria-hidden': true }
-  return <div className="vid"><video ref={A} className="on" {...p}><source src="/video/hero.mp4" type="video/mp4" /></video><video ref={B} {...p}><source src="/video/hero.mp4" type="video/mp4" /></video></div>
+  const p = { muted: true, playsInline: true, preload: 'auto', poster: U('/video/poster.jpg'), 'aria-hidden': true }
+  return <div className="vid"><video ref={A} className="on" {...p}><source src={U('/video/hero.mp4')} type="video/mp4" /></video><video ref={B} {...p}><source src={U('/video/hero.mp4')} type="video/mp4" /></video></div>
 }
 
 function Nav({ active, solid }) {
@@ -88,7 +98,7 @@ const Hero = () => (
   <section id="top" className="hero">
     <LoopVideo /><div className="scrim" />
     <div className="hero-in">
-      <img className="hero-logo a11y-keep" src="/img/logo-white.png" alt="Anchorage Alpha" />
+      <img className="hero-logo a11y-keep" src={U('/img/logo-white.png')} alt="Anchorage Alpha" />
       <p className="hero-line">Anchored in Insight.<br/>Steered by Purpose.</p>
     </div>
     <button className="cue" onClick={() => goTo('about')} aria-label="Scroll to About us"><i /></button>
@@ -181,9 +191,7 @@ function Team() {
 }
 
 const Approach = () => (
-  <section id="approach" className="sec dark approach-sec">
-    <div className="approach-bg"><video src="/video/approach.mp4" poster="/video/approach-poster.jpg" muted loop playsInline autoPlay preload="metadata" aria-hidden="true" /></div>
-    <div className="approach-scrim" aria-hidden="true" />
+  <section id="approach" className="sec dark">
     <div className="wrap split">
       <div className="stick"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
       <ul className="princ">{C.approach.map((a, i) => (
@@ -224,7 +232,7 @@ function Portfolio() {
             <img className="co-logo" src={f.logo} alt={f.name} />
             <h3 className="h3">{f.name}</h3>
             <p className="tag">{f.tag}</p>
-            {f.url && <a className="ul" href={f.url} target="_blank" rel="noopener">Explore company</a>}
+            {f.url && <a className="ul" href={f.url} target="_blank" rel="noopener">Read more &rarr;</a>}
             <ul className="co-pts">{f.pts.map((p, k) => <li key={k}>{p}</li>)}</ul>
             <blockquote><p>{f.q}</p><footer><b>{f.who}</b> {f.role}</footer></blockquote>
           </>}
@@ -254,7 +262,7 @@ function Investors() {
         <div className="panel" id={`panel-${t}`} role="tabpanel" aria-labelledby={`tab-${t}`} tabIndex={0} key={t}>
           {t === 0 && <div className="faq-list">{C.faq.map((f, i) => { const on = qs.has(i); return (
             <div key={i} className={`faq ${on ? 'on' : ''}`}><button id={`faq-q-${i}`} aria-expanded={on} aria-controls={`faq-a-${i}`} onClick={() => toggle(i)}><span>{f.q}</span><i aria-hidden="true" /></button><div className="ans" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}><div><p {...html(f.a)} /></div></div></div>) })}</div>}
-          {t === 1 && <><p className="note first">Policies of Anchorage Capital and its schemes, available to download as PDF.</p>{C.pol.map(p => <div key={p.t} className="pol"><div><h3>{p.t}</h3><p>{p.d}</p></div><a href={p.href} download className="ul">Download<small>{p.meta}</small></a></div>)}</>}
+          {t === 1 && <><p className="note first">Policies of Anchorage Capital and its schemes. Copies are available on request.</p>{C.pol.map(p => <div key={p.t} className="pol"><div><h3>{p.t}</h3><p>{p.d}</p></div><a className="ul" href={`mailto:investor@anchoragealpha.com?subject=${encodeURIComponent('Request a copy: ' + p.t)}`}>Request a copy<small>{p.meta}</small></a></div>)}</>}
           {t === 2 && <><p className="note first">{C.defs.note}</p><dl className="defs">{C.defs.items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></>}
         </div>
       </div>
@@ -273,8 +281,8 @@ const Contact = () => {
   return (
   <section id="contact" className="sec dark">
     <div className="wrap">
-      <Label>Contact</Label>
-      <Rv as="h2" className="h1">Speak with us.</Rv>
+        <Label>Contact</Label>
+        <Rv as="h2" className="h1">Get in touch.</Rv>
       <Rv as="p" d={120} className="lede">For investor enquiries, write to the team directly.</Rv>
       <a className="mail" href="mailto:investor@anchoragealpha.com">investor@anchoragealpha.com</a>
       <div className="cols">
@@ -284,11 +292,11 @@ const Contact = () => {
         <div id="grievance"><h3>Investor grievance redressal</h3><p>SEBI SCORES<br /><a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener">https://scores.sebi.gov.in/</a></p><p>Online Dispute Resolution Portal<br /><a href="https://smartodr.in/" target="_blank" rel="noopener">https://smartodr.in/</a></p></div>
       </div>
       <footer onClick={e => { if (e.target.closest('.nw')) { e.preventDefault(); setDoc('legal'); } }}>
-        {C.footer.map((p, i) => <p key={i} {...html(p)} />)}
-        <div className="foot-docs" id="legal">
-          <button type="button" className="foot-doc-btn" aria-haspopup="dialog" onClick={() => setDoc('legal')}>Legal information</button>
-          <button type="button" className="foot-doc-btn" aria-haspopup="dialog" onClick={() => setDoc('privacy')}>Privacy</button>
-        </div>
+        <div className="foot-main">{C.footer.map((p, i) => <p key={i} {...html(p)} />)}</div>
+        <nav className="foot-links" aria-label="Legal and privacy">
+          <button type="button" className="foot-link" onClick={() => setDoc('legal')}>Legal information</button>
+          <button type="button" className="foot-link" onClick={() => setDoc('privacy')}>Privacy</button>
+        </nav>
       </footer>
     </div>
     <div className={`drawer doc ${doc ? 'open' : ''}`} aria-hidden={!doc}>
@@ -321,6 +329,23 @@ const ToTop = () => {
     </button>)
 }
 
+const Cursor = () => {
+  const dot = useRef(), ring = useRef()
+  useEffect(() => {
+    if (!matchMedia('(pointer: fine)').matches) return
+    let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y, raf
+    const move = e => { x = e.clientX; y = e.clientY; if (dot.current) dot.current.style.transform = `translate(${x}px,${y}px)` }
+    const loop = () => { const k = window.paused ? 1 : .16; rx += (x - rx) * k; ry += (y - ry) * k; if (ring.current) ring.current.style.transform = `translate(${rx}px,${ry}px)`; raf = requestAnimationFrame(loop) }
+    const over = e => { const on = !!(e.target.closest && e.target.closest('a,button,input,select,textarea,[role=tab],.inv-card,.card')); if (ring.current) ring.current.classList.toggle('big', on) }
+    const down = () => { if (ring.current) ring.current.classList.add('down') }
+    const up = () => { if (ring.current) ring.current.classList.remove('down') }
+    addEventListener('mousemove', move); addEventListener('mouseover', over); addEventListener('mousedown', down); addEventListener('mouseup', up)
+    raf = requestAnimationFrame(loop)
+    return () => { cancelAnimationFrame(raf); removeEventListener('mousemove', move); removeEventListener('mouseover', over); removeEventListener('mousedown', down); removeEventListener('mouseup', up) }
+  }, [])
+  return <div className="cursor" aria-hidden="true"><span className="cursor-dot" ref={dot} /><span className="cursor-ring" ref={ring} /></div>
+}
+
 export default function App() {
   const [active, setActive] = useState('top'), [solid, setSolid] = useState(false)
   useEffect(() => {
@@ -342,5 +367,5 @@ export default function App() {
     NAV.forEach(([id]) => io.observe(document.getElementById(id)))
     return () => { cancelAnimationFrame(raf); lenis.destroy(); io.disconnect() }
   }, [])
-  return <><a className="a11y-skip" href="#a11y-main">Skip to main content</a><Nav active={active} solid={solid} /><main id="a11y-main" tabIndex={-1}><Hero /><About /><Legacy /><Team /><Approach /><Portfolio /><Investors /><Contact /></main><ToTop /></>
+  return <><a className="a11y-skip" href="#a11y-main">Skip to main content</a><Nav active={active} solid={solid} /><main id="a11y-main" tabIndex={-1}><Hero /><About /><Legacy /><Team /><Approach /><Portfolio /><Investors /><Contact /></main><ToTop /><Cursor /></>
 }

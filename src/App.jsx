@@ -261,7 +261,16 @@ function Investors() {
     </section>)
 }
 
-const Contact = () => (
+const Contact = () => {
+  const [doc, setDoc] = useState(null)
+  useEffect(() => {
+    if (!doc) return
+    const k = e => e.key === 'Escape' && setDoc(null)
+    addEventListener('keydown', k)
+    try { window.__lenis && window.__lenis.stop() } catch (e) {}
+    return () => { removeEventListener('keydown', k); try { window.__lenis && window.__lenis.start() } catch (e) {} }
+  }, [doc])
+  return (
   <section id="contact" className="sec dark">
     <div className="wrap">
       <Label>Contact</Label>
@@ -274,21 +283,53 @@ const Contact = () => (
         <div><h3>Fund &amp; regulatory</h3><p><b>Fund:</b> Anchorage Capital</p><p><b>Category:</b> Category II AIF</p><p><b>SEBI registration:</b> IN/AIF2/21-22/1003</p><p><b>Sponsor:</b> Rohit Kothari</p><p><b>Investment manager:</b> Anchorage Alpha Investments Advisor Private Limited</p><p><b>Trustee:</b> Orbis Trusteeship Services Private Limited</p><p><b>Compliance officer:</b> Bhaven Jain</p></div>
         <div id="grievance"><h3>Investor grievance redressal</h3><p>SEBI SCORES<br /><a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener">https://scores.sebi.gov.in/</a></p><p>Online Dispute Resolution Portal<br /><a href="https://smartodr.in/" target="_blank" rel="noopener">https://smartodr.in/</a></p></div>
       </div>
-          <footer>{C.footer.map((p, i) => <p key={i} {...html(p)} />)}
-            <div className="foot-fine">
-              <div className="foot-legal" id="legal">{C.legal.map((p, i) => <p key={i} {...html(p)} />)}</div>
-              <div className="foot-privacy">{C.privacy.map((p, i) => <p key={i} {...html(p)} />)}</div>
-            </div>
-          </footer>
+      <footer onClick={e => { if (e.target.closest('.nw')) { e.preventDefault(); setDoc('legal'); } }}>
+        {C.footer.map((p, i) => <p key={i} {...html(p)} />)}
+        <div className="foot-docs" id="legal">
+          <button type="button" className="foot-doc-btn" aria-haspopup="dialog" onClick={() => setDoc('legal')}>Legal information</button>
+          <button type="button" className="foot-doc-btn" aria-haspopup="dialog" onClick={() => setDoc('privacy')}>Privacy</button>
+        </div>
+      </footer>
+    </div>
+    <div className={`drawer doc ${doc ? 'open' : ''}`} aria-hidden={!doc}>
+      <div className="veil" onClick={() => setDoc(null)} />
+      <aside role="dialog" aria-label={doc === 'privacy' ? 'Privacy' : 'Legal information'}>
+        {doc && <><button className="x" onClick={() => setDoc(null)}>Close</button>
+          <h3 className="h3">{doc === 'privacy' ? 'Privacy' : 'Legal information'}</h3>
+          {(doc === 'privacy' ? C.privacy : C.legal).map((p, i) => <p key={i} className="doc-p" {...html(p)} />)}</>}
+      </aside>
     </div>
   </section>)
+}
+
+const ToTop = () => {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const on = () => setShow(window.scrollY > window.innerHeight * 0.9)
+    addEventListener('scroll', on, { passive: true }); on()
+    return () => removeEventListener('scroll', on)
+  }, [])
+  return (
+    <button
+      type="button"
+      className={`to-top ${show ? 'show' : ''}`}
+      aria-label="Back to top"
+      aria-hidden={!show}
+      tabIndex={show ? 0 : -1}
+      onClick={() => goTo('top')}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5.5 11.5 12 5l6.5 6.5"/></svg>
+    </button>)
+}
 
 export default function App() {
   const [active, setActive] = useState('top'), [solid, setSolid] = useState(false)
   useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    window.scrollTo(0, 0)
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
     lenis = new Lenis({ lerp: (window.paused || reduce) ? 1 : 0.085, wheelMultiplier: 0.9 })
     window.__lenis = lenis
+    lenis.scrollTo(0, { immediate: true })
     let raf; const loop = (t) => { lenis.raf(t); raf = requestAnimationFrame(loop) }; raf = requestAnimationFrame(loop)
     const root = document.documentElement
     const on = () => {
@@ -301,5 +342,5 @@ export default function App() {
     NAV.forEach(([id]) => io.observe(document.getElementById(id)))
     return () => { cancelAnimationFrame(raf); lenis.destroy(); io.disconnect() }
   }, [])
-  return <><a className="a11y-skip" href="#a11y-main">Skip to main content</a><Nav active={active} solid={solid} /><main id="a11y-main" tabIndex={-1}><Hero /><About /><Legacy /><Team /><Approach /><Portfolio /><Investors /><Contact /></main></>
+  return <><a className="a11y-skip" href="#a11y-main">Skip to main content</a><Nav active={active} solid={solid} /><main id="a11y-main" tabIndex={-1}><Hero /><About /><Legacy /><Team /><Approach /><Portfolio /><Investors /><Contact /></main><ToTop /></>
 }

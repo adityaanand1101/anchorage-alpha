@@ -213,6 +213,50 @@ const coIcon = t => {
   return CO_ICON_BOLT
 }
 
+function coData(f) {
+  const pts = f.pts3 || f.pts || [];
+  return {
+    logo: f.logo,
+    name: f.name,
+    tagline: f.tag || '',
+    points: [pts[0] || '', pts[1] || '', pts[2] || ''],
+    quote: f.q || '',
+    person: f.who || '',
+    designation: f.role || '',
+    link: f.url || ''
+  };
+}
+
+function CoModal({ d }) {
+  return (
+    <div className="co-grid">
+      <div className="co-side">
+        <img className="co-logo" src={d.logo} alt="" />
+        <h3 className="co-name">{d.name}</h3>
+        <span className="co-rule" aria-hidden="true" />
+        <p className="co-tag">{d.tagline}</p>
+        {d.link && <a className="co-cta" href={d.link} target="_blank" rel="noopener">
+          <span className="co-cta-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h15" /><path d="M13 6l6 6-6 6" /></svg></span>
+          <span className="co-cta-lb">Explore company</span>
+        </a>}
+      </div>
+      <div className="co-main">
+        <ul className="co-points">
+          {d.points.map((p, k) => <li key={k}><span className="co-ic" aria-hidden="true">{coIcon(p)}</span><span className="co-pt">{p}</span></li>)}
+        </ul>
+        <span className="co-div" aria-hidden="true" />
+        <div className="co-quote">
+          <p>{d.quote || '\u00A0'}</p>
+        </div>
+        <div className="co-attrib">
+          <b>{d.person}</b>
+          <span>{d.designation}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Portfolio() {
   const [sel, setSel] = useState(-1)
   const f = sel >= 0 ? C.feat[sel] : null
@@ -244,27 +288,7 @@ function Portfolio() {
         <div className="mcard" role="dialog" aria-label={f ? f.name : 'Company details'}>
           {f && <>
             <button className="x" onClick={() => setSel(-1)} aria-label="Close">&times;</button>
-            <div className="co-grid">
-              <div className="co-side">
-                <img className="co-logo" src={f.logo} alt="" />
-                <h3 className="co-name">{f.name}</h3>
-                <span className="co-rule" aria-hidden="true" />
-                <p className="co-tag">{f.tag}</p>
-                {f.url && <a className="co-cta" href={f.url} target="_blank" rel="noopener">
-                  <span className="co-cta-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></span>
-                  <span className="co-cta-lb">Explore company</span>
-                </a>}
-              </div>
-              <div className="co-main">
-                <ul className="co-points">
-                  {(f.pts3 || f.pts || []).slice(0, 3).map((p, k) => <li key={k}><span className="co-ic" aria-hidden="true">{coIcon(p)}</span><span className="co-pt">{p}</span></li>)}
-                </ul>
-                {f.q && <>
-                  <span className="co-div" aria-hidden="true" />
-                  <blockquote className="co-quote"><p>{f.q}</p><footer><b>{f.who}</b><span>{f.role}</span></footer></blockquote>
-                </>}
-              </div>
-            </div>
+            <CoModal d={coData(f)} />
           </>}
         </div>
       </div>

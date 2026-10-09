@@ -148,6 +148,7 @@ html.a11y-contrast2 img.a11y-keep{filter:invert(1)!important}
 /* in contrast modes, decorative imagery goes away too */
 html.a11y-contrast1 body img:not(.a11y-keep),html.a11y-contrast2 body img:not(.a11y-keep){display:none!important}
 html.a11y-contrast1 body .vid video,html.a11y-contrast2 body .vid video{display:none!important}
+html.a11y-contrast1 body .approach-bg,html.a11y-contrast2 body .approach-bg{display:none!important}
 html.a11y-contrast1 body .hero,html.a11y-contrast2 body .hero{background:var(--a11y-bg)!important}
 html.a11y-contrast1 body .scrim,html.a11y-contrast2 body .scrim{display:none!important}
 html.a11y-contrast1 body .unveil,html.a11y-contrast2 body .unveil,

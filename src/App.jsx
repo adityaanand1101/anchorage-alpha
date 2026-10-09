@@ -181,13 +181,14 @@ function Team() {
 }
 
 const Approach = () => (
-  <section id="approach" className="sec dark">
+  <section id="approach" className="sec dark approach-sec">
+    <div className="approach-bg"><video src="/video/approach.mp4" poster="/video/approach-poster.jpg" muted loop playsInline autoPlay preload="metadata" aria-hidden="true" /></div>
+    <div className="approach-scrim" aria-hidden="true" />
     <div className="wrap split">
       <div className="stick"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
       <ul className="princ">{C.approach.map((a, i) => (
         <Rv as="li" key={i} d={i % 2 ? 80 : 0}><h3>{a.h}</h3><p>{a.p}</p></Rv>))}</ul>
     </div>
-    <figure className="approach-video"><video src="/video/approach.mp4" poster="/video/approach-poster.jpg" muted loop playsInline autoPlay preload="metadata" aria-hidden="true" /></figure>
   </section>)
 
 function Portfolio() {

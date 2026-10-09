@@ -1,4 +1,4 @@
-﻿{
+{
  "about": {
   "h": "Provider of growth capital.",
   "p": [
@@ -24,7 +24,7 @@
    },
    {
     "l": "Total AUM",
-    "n": "~$389mn * â‚¹3,736 Cr",
+    "n": "~$389mn * ₹3,736 Cr",
     "d": "Across schemes"
    }
   ],
@@ -54,7 +54,7 @@
    {
     "b": "290+",
     "s": "Company investments",
-    "e": "250 public Â· 40 private"
+    "e": "250 public · 40 private"
    }
   ],
   "img": "/img/b4c25a322b.jpg"
@@ -325,14 +325,14 @@
    "id": "co-nxtra",
    "logo": "/img/98ccb19196.webp",
    "name": "Nxtra",
-   "tag": "Best-in-Class Execution at Scale in Indiaâ€™s AI Infrastructure Build-Out.",
+   "tag": "Best-in-Class Execution at Scale in India’s AI Infrastructure Build-Out.",
    "url": "https://www.nxtra.in",
    "pts": [
-    "Bharti Airtelâ€™s data centre platform and Indiaâ€™s largest data centre network, with 14 core and 120+ edge facilities nationwide, combining scaled infrastructure with Airtelâ€™s broader ecosystem advantage.",
+    "Bharti Airtel’s data centre platform and India’s largest data centre network, with 14 core and 120+ edge facilities nationwide, combining scaled infrastructure with Airtel’s broader ecosystem advantage.",
     "Scaling from ~300 MW towards 1 GW of AI-ready capacity, led by a high-calibre management team and positioned at the convergence of AI, cloud adoption and data localisation.",
-    "Anchorage invested behind Nxtraâ€™s proven execution and scale, with Alpha Wave Global and Carlyle among the other co-investors in Nxtraâ€™s ~US$1 billion fundraise."
+    "Anchorage invested behind Nxtra’s proven execution and scale, with Alpha Wave Global and Carlyle among the other co-investors in Nxtra’s ~US$1 billion fundraise."
    ],
-   "q": "â€œAnchorage brings a valuable global perspective on AI, compute and digital infrastructure, coupled with a strong understanding of how these themes are evolving in India. Their perspective adds real value as we build for the next generation of digital infrastructure.â€",
+   "q": "“Anchorage brings a valuable global perspective on AI, compute and digital infrastructure, coupled with a strong understanding of how these themes are evolving in India. Their perspective adds real value as we build for the next generation of digital infrastructure.”",
    "who": "Gopal Vittal",
    "role": "Executive Vice Chairman, Bharti Airtel"
   },
@@ -340,14 +340,14 @@
    "id": "co-meril",
    "logo": "/img/7004b0e662.webp",
    "name": "Meril Life Sciences",
-   "tag": "Ahead of Indiaâ€™s MedTech Inflection.",
+   "tag": "Ahead of India’s MedTech Inflection.",
    "url": "https://www.merillife.com",
    "pts": [
-    "Indiaâ€™s largest medical devices company and a global innovator, with integrated R&D and manufacturing across cardiovascular, orthopaedics, surgical robotics and other advanced medical device categories, including pioneering indigenous technologies such as coronary stents and the Myval TAVR platform.",
-    "Anchorage identified MedTech early as a secular growth opportunity, underpinned by strong healthcare tailwinds and an inflection akin to Indiaâ€™s IT sector, backing Meril and its founders at an early stage of their global growth journey.",
-    "Among Merilâ€™s earliest institutional backers, Anchorage invested alongside Warburg Pincus in 2022 at a ~US$1.8 billion valuation. In 2025 ADIA invested at a ~US$6.6 billion valuation."
+    "India’s largest medical devices company and a global innovator, with integrated R&D and manufacturing across cardiovascular, orthopaedics, surgical robotics and other advanced medical device categories, including pioneering indigenous technologies such as coronary stents and the Myval TAVR platform.",
+    "Anchorage identified MedTech early as a secular growth opportunity, underpinned by strong healthcare tailwinds and an inflection akin to India’s IT sector, backing Meril and its founders at an early stage of their global growth journey.",
+    "Among Meril’s earliest institutional backers, Anchorage invested alongside Warburg Pincus in 2022 at a ~US$1.8 billion valuation. In 2025 ADIA invested at a ~US$6.6 billion valuation."
    ],
-   "q": "â€œOur relationship with Rohit and Anchorage spans over 25 years, grounded in trust and a shared long-term vision. They understood what we were building long before its scale was evident, and have remained a trusted partner through our journey.â€",
+   "q": "“Our relationship with Rohit and Anchorage spans over 25 years, grounded in trust and a shared long-term vision. They understood what we were building long before its scale was evident, and have remained a trusted partner through our journey.”",
    "who": "Shahid Bilakhia",
    "role": "Co-founder & Chairman, Meril Life Sciences Group"
   },
@@ -355,15 +355,15 @@
    "id": "co-neysa",
    "logo": "/img/56a1a016f7.webp",
    "name": "Neysa Networks",
-   "tag": "Early Access to Indiaâ€™s AI Compute Layer.",
+   "tag": "Early Access to India’s AI Compute Layer.",
    "url": "https://neysa.ai",
    "pts": [
-    "Founded by Sharad Sanghi, a pioneer of Indiaâ€™s commercial data centre industry, bringing deep pedigree in building and scaling digital infrastructure.",
-    "Positioned at the heart of Indiaâ€™s AI build-out, providing sovereign, production-grade AI infrastructure for mission-critical enterprise and government workloads.",
-    "One of Indiaâ€™s select AI cloud platforms working with both NVIDIA and AMD, with the capability to deploy and operate GPU infrastructure at scale.",
+    "Founded by Sharad Sanghi, a pioneer of India’s commercial data centre industry, bringing deep pedigree in building and scaling digital infrastructure.",
+    "Positioned at the heart of India’s AI build-out, providing sovereign, production-grade AI infrastructure for mission-critical enterprise and government workloads.",
+    "One of India’s select AI cloud platforms working with both NVIDIA and AMD, with the capability to deploy and operate GPU infrastructure at scale.",
     "Anchorage identified and backed Neysa at a formative stage, with the platform subsequently attracting a ~US$1.2 billion Blackstone-led capital commitment to accelerate AI infrastructure deployment across India."
    ],
-   "q": "â€œAnchorage saw the scale of the opportunity in Neysa before we fully appreciated it. Their conviction in what the business could become was striking at the time, and the journey since has demonstrated the foresight behind that view.â€",
+   "q": "“Anchorage saw the scale of the opportunity in Neysa before we fully appreciated it. Their conviction in what the business could become was striking at the time, and the journey since has demonstrated the foresight behind that view.”",
    "who": "Sharad Sanghi",
    "role": "Founder & CEO, Neysa Networks"
   },
@@ -374,11 +374,11 @@
    "tag": "Growth Capital Behind an Electrification Leader.",
    "url": "https://precisionwires.in",
    "pts": [
-    "One of Asiaâ€™s leading winding wire manufacturers, with a track record spanning over three decades and exposure across Power, EVs, Renewables and Data Centres.",
-    "Anchorage invested at a key inflection point in Indiaâ€™s electrification cycle, drawing on a deep familiarity with the sector.",
+    "One of Asia’s leading winding wire manufacturers, with a track record spanning over three decades and exposure across Power, EVs, Renewables and Data Centres.",
+    "Anchorage invested at a key inflection point in India’s electrification cycle, drawing on a deep familiarity with the sector.",
     "Growth capital deployed across multiple rounds enabled a record capex programme, accelerating capacity expansion and driving a step-change in earnings growth."
    ],
-   "q": "â€œOur relationship with the Kotharis goes back three decades, well beyond investment. They have backed us consistently through successive phases of growth and capital raising, the kind of steadfast partnership that is rare to find.â€",
+   "q": "“Our relationship with the Kotharis goes back three decades, well beyond investment. They have backed us consistently through successive phases of growth and capital raising, the kind of steadfast partnership that is rare to find.”",
    "who": "Milan Mehta",
    "role": "Chairman & Managing Director, Precision Wires"
   },
@@ -393,7 +393,7 @@
     "A capital-light, exceptionally high-margin model with superior ROCE, where specialist domain knowledge, complex risk structuring and deep client relationships create a durable competitive moat.",
     "Anchorage invested in ACE for its specialist franchise and exceptional economics. Blackstone holds a majority stake in the business."
    ],
-   "q": "â€œAnchorage was our first investment partner and understood the quality and potential of our business early. They have been a thoughtful partner through our evolution, supporting us as we scaled and entered our next phase of institutional growth.â€",
+   "q": "“Anchorage was our first investment partner and understood the quality and potential of our business early. They have been a thoughtful partner through our evolution, supporting us as we scaled and entered our next phase of institutional growth.”",
    "who": "Raj Ajmera",
    "role": "Founder, ACE Insurance Brokers"
   },
@@ -405,10 +405,10 @@
    "url": "https://www.eiel.in",
    "pts": [
     "Integrated water infrastructure player spanning sewage, industrial wastewater and recycling, with in-house capabilities across process design and execution; expanding into Desalination and Zero Liquid Discharge (ZLD) for its next phase of growth.",
-    "Positioned in a â‚¹20 trillion (~US$240 billion) decade-long opportunity, as water becomes an increasingly critical resource across industries, driven by infrastructure investment, industrial demand and tightening wastewater norms.",
+    "Positioned in a ₹20 trillion (~US$240 billion) decade-long opportunity, as water becomes an increasingly critical resource across industries, driven by infrastructure investment, industrial demand and tightening wastewater norms.",
     "Anchorage identified the water infrastructure opportunity early, backing Enviro at a nascent stage, well ahead of broader market recognition, and supporting its evolution from a small player into a scaled water infrastructure platform."
    ],
-   "q": "â€œAnchorage recognised the potential of water resource management well before most, and backed us at a very early stage in our journey. The conviction with which they put in capital gave us the confidence to pursue a much larger opportunity and accelerate our growth.â€",
+   "q": "“Anchorage recognised the potential of water resource management well before most, and backed us at a very early stage in our journey. The conviction with which they put in capital gave us the confidence to pursue a much larger opportunity and accelerate our growth.”",
    "who": "Manish Jain",
    "role": "Managing Director, Enviro Infra Engineers"
   },
@@ -424,7 +424,7 @@
     "Proven turnaround specialist, with a track record of bringing stalled mines to life and rapidly scaling production: a distinctive execution edge in a complex sector.",
     "Anchorage backed Thriveni for its exceptional execution, strong return ratios and significant growth optionality, with several opportunities identified at investment already translating into live projects."
    ],
-   "q": "â€œAnchorage brings a depth of understanding of the resources sector that is unusual for an investor. Their ability to understand the operating realities of our business and engage with us from that perspective makes them a highly valued partner.â€",
+   "q": "“Anchorage brings a depth of understanding of the resources sector that is unusual for an investor. Their ability to understand the operating realities of our business and engage with us from that perspective makes them a highly valued partner.”",
    "who": "B. Prabhakaran",
    "role": "Founder & Managing Director, Thriveni Earthmovers"
   },
@@ -439,7 +439,7 @@
     "Global deeptech platform built around proprietary AI/ML alpha engines and self-learning strategies, combining advanced data science with institutional-scale, low-latency execution; processing ~500 million orders daily with a 100+ member team of IIT-trained engineers and data scientists.",
     "Anchorage backed Qi Cap early, recognising the potential for AI-native investing to disrupt traditional asset management well before the theme entered the mainstream."
    ],
-   "q": "â€œAnchorage is an exceptionally sharp investment team with a deep understanding of capital markets and technology. They understood the potential of our AI-led approach early, well before the opportunity became widely recognised.â€",
+   "q": "“Anchorage is an exceptionally sharp investment team with a deep understanding of capital markets and technology. They understood the potential of our AI-led approach early, well before the opportunity became widely recognised.”",
    "who": "Amit Rathi",
    "role": "Co-founder & CEO, Qi Cap"
   }
@@ -448,22 +448,22 @@
   {
    "logo": "/img/98ccb19196.webp",
    "name": "Nxtra Data",
-   "d": "Indiaâ€™s largest data centre network."
+   "d": "India’s largest data centre network."
   },
   {
    "logo": "/img/7004b0e662.webp",
    "name": "Meril Life Sciences",
-   "d": "Indiaâ€™s largest home-grown medical device maker."
+   "d": "India’s largest home-grown medical device maker."
   },
   {
    "logo": "/img/56a1a016f7.webp",
    "name": "Neysa Networks",
-   "d": "Among Indiaâ€™s Top 2 AI Neocloud Platforms."
+   "d": "Among India’s Top 2 AI Neocloud Platforms."
   },
   {
    "logo": "/img/93cde5b01d.webp",
    "name": "Precision Wires",
-   "d": "One of Asiaâ€™s leading winding wire manufacturers."
+   "d": "One of Asia’s leading winding wire manufacturers."
   },
   {
    "logo": "/img/99d9c8dd14.webp",
@@ -478,32 +478,32 @@
   {
    "logo": "/img/bd8b239384.svg",
    "name": "Thriveni Earthmovers",
-   "d": "One of Indiaâ€™s largest private mineral value-chain powerhouses."
+   "d": "One of India’s largest private mineral value-chain powerhouses."
   },
   {
    "logo": "/img/2f01274676.webp",
    "name": "Qi Cap",
-   "d": "One of Indiaâ€™s premier AI driven quantitative research trading platforms."
+   "d": "One of India’s premier AI driven quantitative research trading platforms."
   },
   {
    "logo": "/img/9f1e744a5e.svg",
    "name": "Inox Clean Energy",
-   "d": "One of Indiaâ€™s fastest-growing integrated clean energy platforms."
+   "d": "One of India’s fastest-growing integrated clean energy platforms."
   },
   {
    "logo": "/img/9a0a056f99.webp",
    "name": "Caliber Mining & Logistics",
-   "d": "One of Indiaâ€™s leading mineral resource and logistics platforms."
+   "d": "One of India’s leading mineral resource and logistics platforms."
   },
   {
    "logo": "/img/9c5cddae64.svg",
    "name": "GREW Solar",
-   "d": "One of Indiaâ€™s leading integrated solar equipment manufacturers."
+   "d": "One of India’s leading integrated solar equipment manufacturers."
   },
   {
    "logo": "/img/4172562d7c.webp",
    "name": "Qucev",
-   "d": "One of Indiaâ€™s most promising electric logistics companies."
+   "d": "One of India’s most promising electric logistics companies."
   }
  ],
  "faq": [
@@ -525,7 +525,7 @@
   },
   {
    "q": "How many schemes does Anchorage Capital have?",
-   "a": "Anchorage Capital has three schemes: Scheme I (inception May 2022), Scheme II (inception September 2023) and Scheme III (inception October 2025). Across its schemes the fund manages a collective ~US$389mn, â‚¹3,736 crore."
+   "a": "Anchorage Capital has three schemes: Scheme I (inception May 2022), Scheme II (inception September 2023) and Scheme III (inception October 2025). Across its schemes the fund manages a collective ~US$389mn, ₹3,736 crore."
   },
   {
    "q": "Who is the founder of Anchorage?",
@@ -544,31 +544,31 @@
   {
    "t": "Investor Grievance Redressal Policy",
    "d": "How investor queries and complaints are received, escalated and resolved, with response timelines at each level and access to SEBI SCORES.",
-   "meta": "PDF Â· 11 pages Â· 1.5 MB",
+   "meta": "PDF · 11 pages · 1.5 MB",
    "href": "/policies/0adf660ead.pdf"
   },
   {
    "t": "Stewardship Code",
    "d": "Our principles for monitoring, engaging with and voting at investee companies, in line with SEBI's stewardship framework.",
-   "meta": "PDF Â· 10 pages Â· 1.0 MB",
+   "meta": "PDF · 10 pages · 1.0 MB",
    "href": "/policies/f973bf95f4.pdf"
   },
   {
    "t": "Conflict of Interest Policy",
    "d": "How potential conflicts between investors, the investment manager, the sponsor and service providers are identified, managed and disclosed.",
-   "meta": "PDF Â· 11 pages Â· 791 KB",
+   "meta": "PDF · 11 pages · 791 KB",
    "href": "/policies/91285fb570.pdf"
   },
   {
    "t": "Risk Management Policy",
    "d": "The framework used to identify, assess, mitigate and monitor risks across the fund, its schemes and its investments.",
-   "meta": "PDF Â· 14 pages Â· 822 KB",
+   "meta": "PDF · 14 pages · 822 KB",
    "href": "/policies/941d3d8dbc.pdf"
   },
   {
    "t": "AML, CFT and KYC Policy",
    "d": "Anti-money laundering, counter-terrorist financing and know-your-customer procedures applied to every investor in the fund.",
-   "meta": "PDF Â· 37 pages Â· 4.7 MB",
+   "meta": "PDF · 37 pages · 4.7 MB",
    "href": "/policies/4f935f0891.pdf"
   }
  ],
@@ -664,6 +664,6 @@
  "footer": [
   "Anchorage Alpha Investments Advisor Private Limited is the investment manager of Anchorage Capital, a SEBI registered Category II Alternative Investment Fund (registration no. IN/AIF2/21-22/1003).",
   "Units are offered solely by private placement to eligible investors. Nothing on this website is an offer or solicitation. Past performance is not indicative of future results, and investments are subject to risks, including loss of capital. <a class=\"nw\" href=\"#legal\">Read the full legal information.</a>",
-  "Â© 2026 Anchorage Alpha Investments Advisor Private Limited. All rights reserved."
+  "© 2026 Anchorage Alpha Investments Advisor Private Limited. All rights reserved."
  ]
 }

@@ -118,11 +118,11 @@ const About = () => { const a = C.about; return (
       </div>
       <SecLabel>Our schemes</SecLabel>
       <div className="schemes">
-        {a.schemes.map((s, i) => { const aum = /AUM/.test(s.l), [usd, inr] = s.n.replace('*', '').split('₹'); const date = s.d.replace(/^Inception\s*/, ''); return (
+        {a.schemes.map((s, i) => { const aum = /AUM/.test(s.l), [usd, inr] = s.n.replace('*', '').split('\u20B9'); const date = s.d.replace(/^Inception\s*/, ''); return (
           <Rv key={i} d={i * 90} className={`scheme ${aum ? 'aum' : ''}`}>
             <span className="k">{s.l}</span>
             {aum
-              ? <><span className="big">{usd.trim()}<sup>*</sup><i className="vsep" aria-hidden="true" /><span className="inr">₹{inr}</span></span></>
+              ? <><span className="big"><span className="val">{usd.trim()}<sup>*</sup></span><i className="vsep" aria-hidden="true" /><span className="inr">{'\u20B9'}{inr}</span></span></>
               : <span className="big">{s.n}</span>}
             <span className="sdiv" aria-hidden="true" />
             <span className="sfoot">
@@ -329,23 +329,6 @@ const ToTop = () => {
     </button>)
 }
 
-const Cursor = () => {
-  const dot = useRef(), ring = useRef()
-  useEffect(() => {
-    if (!matchMedia('(pointer: fine)').matches) return
-    let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y, raf
-    const move = e => { x = e.clientX; y = e.clientY; if (dot.current) dot.current.style.transform = `translate(${x}px,${y}px)` }
-    const loop = () => { const k = window.paused ? 1 : .16; rx += (x - rx) * k; ry += (y - ry) * k; if (ring.current) ring.current.style.transform = `translate(${rx}px,${ry}px)`; raf = requestAnimationFrame(loop) }
-    const over = e => { const on = !!(e.target.closest && e.target.closest('a,button,input,select,textarea,[role=tab],.inv-card,.card')); if (ring.current) ring.current.classList.toggle('big', on) }
-    const down = () => { if (ring.current) ring.current.classList.add('down') }
-    const up = () => { if (ring.current) ring.current.classList.remove('down') }
-    addEventListener('mousemove', move); addEventListener('mouseover', over); addEventListener('mousedown', down); addEventListener('mouseup', up)
-    raf = requestAnimationFrame(loop)
-    return () => { cancelAnimationFrame(raf); removeEventListener('mousemove', move); removeEventListener('mouseover', over); removeEventListener('mousedown', down); removeEventListener('mouseup', up) }
-  }, [])
-  return <div className="cursor" aria-hidden="true"><span className="cursor-dot" ref={dot} /><span className="cursor-ring" ref={ring} /></div>
-}
-
 export default function App() {
   const [active, setActive] = useState('top'), [solid, setSolid] = useState(false)
   useEffect(() => {
@@ -367,5 +350,5 @@ export default function App() {
     NAV.forEach(([id]) => io.observe(document.getElementById(id)))
     return () => { cancelAnimationFrame(raf); lenis.destroy(); io.disconnect() }
   }, [])
-  return <><a className="a11y-skip" href="#a11y-main">Skip to main content</a><Nav active={active} solid={solid} /><main id="a11y-main" tabIndex={-1}><Hero /><About /><Legacy /><Team /><Approach /><Portfolio /><Investors /><Contact /></main><ToTop /><Cursor /></>
+  return <><a className="a11y-skip" href="#a11y-main">Skip to main content</a><Nav active={active} solid={solid} /><main id="a11y-main" tabIndex={-1}><Hero /><About /><Legacy /><Team /><Approach /><Portfolio /><Investors /><Contact /></main><ToTop /></>
 }

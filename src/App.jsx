@@ -184,7 +184,7 @@ const About = () => { const a = C.about; return (
           <Rv as="h2" className="h2">{a.h}</Rv>
           {a.p.map((p, i) => <Rv key={i} as="p" d={120 * (i + 1)} className="lede" {...html(p)} />)}
         </div>
-        <Unveil src={a.img} alt="Sunrise over calm water" className="tall" />
+        <Unveil src={a.img} alt="A stone loggia opening onto calm water at sunset" className="wide" />
       </div>
       <SecLabel>Our schemes</SecLabel>
       <div className="schemes">
@@ -210,7 +210,7 @@ const Legacy = () => { const l = C.legacy, f = C.founder; return (
     <div className="wrap">
       <Label>Legacy</Label>
       <div className="two flip">
-        <Unveil src={l.img} alt="A stone loggia opening onto calm water at sunset" className="wide" />
+        <Unveil src={l.img} alt="Sunrise over calm water" className="tall" />
         <div>
           <Rv as="h2" className="h2">{l.h}</Rv>
           <Rv as="p" d={100} className="sub-h">{l.sub}</Rv>

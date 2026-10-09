@@ -89,7 +89,7 @@ const Hero = () => (
     <LoopVideo /><div className="scrim" />
     <div className="hero-in">
       <img className="hero-logo a11y-keep" src="/img/logo-white.png" alt="Anchorage Alpha" />
-      <p className="hero-line">Growth capital for Indian companies with a decisive moat and exceptional founders.</p>
+      <p className="hero-line">Anchored in Insight.<br/>Steered by Purpose.</p>
     </div>
     <button className="cue" onClick={() => goTo('about')} aria-label="Scroll to About us"><i /></button>
   </section>
@@ -197,7 +197,7 @@ function Portfolio() {
     const k = e => e.key === 'Escape' && setSel(-1)
     addEventListener('keydown', k)
     try { window.__lenis && window.__lenis.stop() } catch (e) {}
-    const x = document.querySelector('.drawer.co .x'); x && x.focus()
+    const x = document.querySelector('.modal.co .x'); x && x.focus()
     return () => { removeEventListener('keydown', k); try { window.__lenis && window.__lenis.start() } catch (e) {} }
   }, [f])
   return (
@@ -215,10 +215,10 @@ function Portfolio() {
             </button>
           </Rv>) })}</ul>
       </div>
-      <div className={`drawer co ${sel >= 0 ? 'open' : ''}`} aria-hidden={sel < 0}>
+      <div className={`modal co ${sel >= 0 ? 'open' : ''}`} aria-hidden={sel < 0}>
         <div className="veil" onClick={() => setSel(-1)} />
-        <aside role="dialog" aria-label={f ? f.name : 'Company details'}>
-          {f && <><button className="x" onClick={() => setSel(-1)}>Close</button>
+        <div className="mcard" role="dialog" aria-label={f ? f.name : 'Company details'}>
+          {f && <><button className="x" onClick={() => setSel(-1)} aria-label="Close">\u00d7</button>
             <img className="co-logo" src={f.logo} alt={f.name} />
             <h3 className="h3">{f.name}</h3>
             <p className="tag">{f.tag}</p>
@@ -226,7 +226,7 @@ function Portfolio() {
             <ul className="co-pts">{f.pts.map((p, k) => <li key={k}>{p}</li>)}</ul>
             <blockquote><p>{f.q}</p><footer><b>{f.who}</b> {f.role}</footer></blockquote>
           </>}
-        </aside>
+        </div>
       </div>
     </section>)
 }
@@ -273,8 +273,10 @@ const Contact = () => (
         <div id="grievance"><h3>Investor grievance redressal</h3><p>SEBI SCORES<br /><a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener">https://scores.sebi.gov.in/</a></p><p>Online Dispute Resolution Portal<br /><a href="https://smartodr.in/" target="_blank" rel="noopener">https://smartodr.in/</a></p></div>
       </div>
           <footer>{C.footer.map((p, i) => <p key={i} {...html(p)} />)}
-            <div className="foot-legal" id="legal">{C.legal.map((p, i) => <p key={i} {...html(p)} />)}</div>
-            <div className="foot-privacy">{C.privacy.map((p, i) => <p key={i} {...html(p)} />)}</div>
+            <div className="foot-fine">
+              <div className="foot-legal" id="legal">{C.legal.map((p, i) => <p key={i} {...html(p)} />)}</div>
+              <div className="foot-privacy">{C.privacy.map((p, i) => <p key={i} {...html(p)} />)}</div>
+            </div>
           </footer>
     </div>
   </section>)

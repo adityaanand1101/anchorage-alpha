@@ -191,7 +191,9 @@ function Team() {
 }
 
 const Approach = () => (
-  <section id="approach" className="sec dark">
+  <section id="approach" className="sec dark approach-sec">
+    <div className="approach-bg" aria-hidden="true"><video src={U('/video/approach.mp4')} poster={U('/video/approach-poster.jpg')} muted loop playsInline autoPlay preload="metadata" /></div>
+    <div className="approach-scrim" aria-hidden="true" />
     <div className="wrap split">
       <div className="stick"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
       <ul className="princ">{C.approach.map((a, i) => (

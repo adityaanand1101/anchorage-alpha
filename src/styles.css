@@ -45,7 +45,7 @@ sup{font-size:.45em;vertical-align:super;margin-left:.1em}
 .label i{height:1px;width:0;background:currentColor;opacity:.5;transition:width 1.4s .2s cubic-bezier(.65,0,.2,1)}.label.in i{width:64px}
 .dark .label{color:var(--sand)}
 .h1,.h2,.h3{font-family:var(--serif);font-weight:400;letter-spacing:-.012em;line-height:1.08}
-.h2{font-size:clamp(2.2rem,4.6vw,4rem);max-width:15ch}.h1{font-size:clamp(3rem,8.5vw,8rem);line-height:1}.h3{font-size:clamp(1.8rem,3vw,2.6rem)}
+.h2{font-size:clamp(2.2rem,4.6vw,4rem);max-width:15ch}.h1{font-size:clamp(2.1rem,4.6vw,3.8rem);line-height:1.08}.h3{font-size:clamp(1.8rem,3vw,2.6rem)}
 .lede,.body{margin-top:1.5rem;max-width:54ch;font-size:1.0625rem;line-height:1.8;color:var(--ink)}.dark .lede{color:rgba(250,247,242,.72)}
 .sub-h{margin-top:1.4rem;font:italic 400 1.35rem/1.4 var(--serif);color:var(--ocean)}
 .note{margin-top:1.8rem;max-width:80ch;font-size:.75rem;line-height:1.7;color:var(--mist)}.note.first{margin:0 0 1.5rem}
@@ -207,7 +207,8 @@ dl{margin-top:1.6rem}dl>div{display:grid;grid-template-columns:120px 1fr;gap:1re
 @media(max-width:560px){.faq-list{margin-right:0}.tabs{gap:34px}.tabs button{font-size:16px}}
 
 /* contact */
-.mail{display:inline-block;margin:clamp(1.6rem,3.5vw,2.6rem) 0 clamp(2.2rem,4vw,4rem);font:italic 400 clamp(1.5rem,4.2vw,3.6rem)/1.2 var(--serif);background:linear-gradient(var(--sand),var(--sand)) left bottom/100% 1px no-repeat;padding-bottom:.3rem;transition:color .5s,background-size .8s var(--ease)}
+.mail{display:inline-block;margin:clamp(1.4rem,3vw,2.2rem) 0 clamp(2rem,3.6vw,3.4rem);font:italic 400 clamp(1.05rem,2.3vw,1.9rem)/1.3 var(--serif);background:linear-gradient(var(--sand),var(--sand)) left bottom/100% 1px no-repeat;padding-bottom:.3rem;transition:color .5s,background-size .8s var(--ease)}
+#contact .lede{font-size:.95rem;line-height:1.7}
 .mail:hover{color:var(--sand);background-size:0 1px;background-position:right bottom}
 .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:2.6rem;font-size:.88rem;line-height:1.75;color:rgba(250,247,242,.74)}
 .cols h3{margin-bottom:1.1rem;font-size:.6875rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--sand)}.cols p{margin-bottom:.6rem}.cols b{font-weight:400;color:var(--ivory)}.cols a:hover{color:var(--sand)}address{font-style:normal}

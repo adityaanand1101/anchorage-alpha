@@ -201,6 +201,18 @@ const Approach = () => (
     </div>
   </section>)
 
+const CO_ICONS = {
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 5 13.5h5L10.5 22 19 10.5h-5z"/></svg>',
+  trend: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5.5-5.5 3.5 3.5L21 6"/><path d="M15 6h6v6"/></svg>',
+  build: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V9.5l5 3.2V9.5l5 3.2V5.5h4V21"/><path d="M9 17h1.5M13.5 17H15"/></svg>'
+}
+const coIcon = t => {
+  const s = (t || '').toLowerCase()
+  if (/\b(platform|network|facilit|plant|capex|manufactur|infrastructure|capacity|energy|solar|mining|resources|logistics|hardware|device|devic)\b/.test(s)) return CO_ICONS.build
+  if (/\b(scale|scaling|grow|growth|expansion|demand|record|accelerat|adoption|uptime|return)\b/.test(s)) return CO_ICONS.trend
+  return CO_ICONS.bolt
+}
+
 function Portfolio() {
   const [sel, setSel] = useState(-1)
   const f = sel >= 0 ? C.feat[sel] : null
@@ -230,13 +242,29 @@ function Portfolio() {
       <div className={`modal co ${sel >= 0 ? 'open' : ''}`} aria-hidden={sel < 0}>
         <div className="veil" onClick={() => setSel(-1)} />
         <div className="mcard" role="dialog" aria-label={f ? f.name : 'Company details'}>
-          {f && <><button className="x" onClick={() => setSel(-1)} aria-label="Close">&times;</button>
-            <img className="co-logo" src={f.logo} alt={f.name} />
-            <h3 className="h3">{f.name}</h3>
-            <p className="tag">{f.tag}</p>
-            {f.url && <a className="ul" href={f.url} target="_blank" rel="noopener">Read more &rarr;</a>}
-            <ul className="co-pts">{f.pts.map((p, k) => <li key={k}>{p}</li>)}</ul>
-            <blockquote><p>{f.q}</p><footer><b>{f.who}</b> {f.role}</footer></blockquote>
+          {f && <>
+            <button className="x" onClick={() => setSel(-1)} aria-label="Close">&times;</button>
+            <div className="co-grid">
+              <div className="co-side">
+                <img className="co-logo" src={f.logo} alt={f.name} />
+                <h3 className="co-name">{f.name}</h3>
+                <span className="co-rule" aria-hidden="true" />
+                <p className="co-tag">{f.tag}</p>
+                {f.url && <a className="co-cta" href={f.url} target="_blank" rel="noopener">
+                  <span className="co-cta-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></span>
+                  <span className="co-cta-lb">Explore company</span>
+                </a>}
+              </div>
+              <div className="co-main">
+                <ul className="co-points">
+                  {(f.pts3 || f.pts || []).slice(0, 3).map((p, k) => <li key={k}><span className="co-ic" aria-hidden="true">{coIcon(p)}</span><span className="co-pt">{p}</span></li>)}
+                </ul>
+                {f.q && <>
+                  <span className="co-div" aria-hidden="true" />
+                  <blockquote className="co-quote"><p>{f.q}</p><footer><b>{f.who}</b><span>{f.role}</span></footer></blockquote>
+                </>}
+              </div>
+            </div>
           </>}
         </div>
       </div>

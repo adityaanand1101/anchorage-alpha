@@ -21,14 +21,35 @@ const goTo = (id) => lenis ? lenis.scrollTo(id === 'top' ? 0 : '#' + id, { durat
 function useSeen(margin = '0px 0px -12% 0px') {
   const ref = useRef(), [seen, set] = useState(false)
   useEffect(() => {
+    const el = ref.current
+    if (!el || typeof IntersectionObserver === 'undefined') { set(true); return }
     const io = new IntersectionObserver(([e]) => e.isIntersecting && (set(true), io.disconnect()), { rootMargin: margin })
-    io.observe(ref.current); return () => io.disconnect()
+    io.observe(el); return () => io.disconnect()
   }, [margin])
   return [ref, seen]
 }
-const Rv = ({ as: T = 'div', d = 0, className = '', children, ...p }) => {
+const Rv = ({ as: T = 'div', d = 0, className = '', children, style, ...p }) => {
   const [ref, seen] = useSeen()
-  return <T ref={ref} className={`rv ${seen ? 'in' : ''} ${className}`} style={{ '--d': d + 'ms' }} {...p}>{children}</T>
+  return <T ref={ref} className={`rv ${seen ? 'in' : ''} ${className}`} style={{ '--d': d + 'ms', ...style }} {...p}>{children}</T>
+}
+/* keeps Tab inside an open drawer or dialog */
+function useTrap(on, ref) {
+  useEffect(() => {
+    if (!on) return
+    const el = ref.current
+    if (!el) return
+    const sel = 'a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])'
+    const k = e => {
+      if (e.key !== 'Tab') return
+      const f = el.querySelectorAll(sel)
+      if (!f.length) return
+      const first = f[0], last = f[f.length - 1]
+      if (e.shiftKey && (document.activeElement === first || !el.contains(document.activeElement))) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && (document.activeElement === last || !el.contains(document.activeElement))) { e.preventDefault(); first.focus() }
+    }
+    document.addEventListener('keydown', k)
+    return () => document.removeEventListener('keydown', k)
+  }, [on, ref])
 }
 const Unveil = ({ src, alt, className = '' }) => {
   const [ref, seen] = useSeen()
@@ -46,31 +67,80 @@ function Count({ html: h }) {
     r = requestAnimationFrame(f); return () => cancelAnimationFrame(r)
   }, [seen])
   if (!m) return <b {...html(h)} />
-  return <b ref={ref} aria-live="polite">{m[1]}{n}<span className="sfx" {...html(m[3])} /></b>
+  return <b ref={ref}><span aria-hidden="true">{m[1]}{n}</span><span className="vh">{m[1]}{m[2]}</span><span className="sfx" {...html(m[3])} /></b>
 }
 
 /* Hero video: two stacked players, the next one fades in over the last 1.4s of the current one */
 function LoopVideo() {
   const A = useRef(), B = useRef()
   useEffect(() => {
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) return
-    let cur = A.current, nxt = B.current, busy = false, raf
+    const a = A.current, b = B.current
+    if (!a || !b) return
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const F = 1.4
-    cur.play().catch(() => {})
+    let cur = a, nxt = b, busy = false, raf = 0, timer = 0, guard = 0, seen = true, swapId = 0
+    const play = v => { try { const r = v.play(); if (r && r.catch) r.catch(() => {}) } catch (e) {} }
+    const seek = (v, t) => { try { v.currentTime = t } catch (e) {} }
+    const decoded = v => new Promise(res => {
+      if (v.readyState >= 3) return res()
+      let done = false
+      const ok = () => { if (done) return; done = true; v.removeEventListener('canplay', ok); clearTimeout(guard); res() }
+      v.addEventListener('canplay', ok)
+      guard = setTimeout(ok, 2500)
+    })
+    play(a)
     const tick = () => {
-      if (window.paused) { if (cur.ended) { try { cur.currentTime = 0; cur.play().catch(() => {}) } catch (e) {} } raf = requestAnimationFrame(tick); return }
-      if (cur.duration && !busy && cur.currentTime >= cur.duration - F) {
-        busy = true; const old = cur; nxt.currentTime = 0; nxt.play().catch(() => {})
-        nxt.style.zIndex = 2; old.style.zIndex = 1; nxt.classList.add('on')
-        setTimeout(() => { old.pause(); old.classList.remove('on'); old.currentTime = 0; cur = nxt; nxt = old; busy = false }, F * 1000 + 80)
+      const live = seen && !document.hidden && !window.paused
+      if (live && !busy && cur.duration && cur.currentTime >= cur.duration - F) {
+        busy = true
+        const old = cur, id = ++swapId
+        seek(nxt, 0)
+        decoded(nxt).then(() => {
+          if (id !== swapId || !seen || document.hidden) { busy = false; return }
+          play(nxt)
+          nxt.style.zIndex = '2'; old.style.zIndex = '1'
+          nxt.classList.add('on')
+          timer = setTimeout(() => {
+            old.pause(); old.classList.remove('on')
+            seek(old, 0)
+            cur = nxt; nxt = old; busy = false
+          }, F * 1000 + 80)
+        })
+      } else if (live && cur.ended) {
+        seek(cur, 0); play(cur)
       }
       raf = requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf)
+    raf = requestAnimationFrame(tick)
+    const io = new IntersectionObserver(([e]) => {
+      seen = e.isIntersecting
+      if (seen) play(cur); else { try { cur.pause(); nxt.pause() } catch (e) {} }
+    }, { threshold: 0.01 })
+    io.observe(a)
+    const onVis = () => { if (document.hidden) { cur.pause(); nxt.pause() } else if (seen) play(cur) }
+    document.addEventListener('visibilitychange', onVis)
+    return () => { cancelAnimationFrame(raf); clearTimeout(timer); clearTimeout(guard); io.disconnect(); document.removeEventListener('visibilitychange', onVis); a.pause(); b.pause() }
   }, [])
-  const p = { muted: true, playsInline: true, preload: 'auto', poster: U('/video/poster.jpg'), 'aria-hidden': true }
+  const p = { muted: true, playsInline: true, preload: 'auto', poster: U('/video/poster.jpg'), 'aria-hidden': true, disablePictureInPicture: true }
   return <div className="vid"><video ref={A} className="on" {...p}><source src={U('/video/hero.mp4')} type="video/mp4" /></video><video ref={B} {...p}><source src={U('/video/hero.mp4')} type="video/mp4" /></video></div>
+}
+
+/* Background video that only runs while on screen and degrades to the poster if it fails */
+function BgVideo({ src, poster }) {
+  const ref = useRef(), [live, setLive] = useState(true)
+  useEffect(() => {
+    const v = ref.current
+    if (!v) return
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.pause(); return }
+    const play = () => { try { const r = v.play(); if (r && r.catch) r.catch(() => {}) } catch (e) {} }
+    const io = new IntersectionObserver(([e]) => { e.isIntersecting ? (play()) : v.pause() }, { threshold: 0.01 })
+    io.observe(v)
+    const onVis = () => { document.hidden ? v.pause() : play() }
+    document.addEventListener('visibilitychange', onVis)
+    return () => { io.disconnect(); document.removeEventListener('visibilitychange', onVis) }
+  }, [])
+  if (!live) return null
+  return <video ref={ref} src={src} poster={poster} muted loop playsInline autoPlay preload="metadata" disablePictureInPicture onError={() => setLive(false)} />
 }
 
 function Nav({ active, solid }) {
@@ -163,6 +233,8 @@ const Legacy = () => { const l = C.legacy, f = C.founder; return (
 
 function Team() {
   const [p, setP] = useState(null)
+  const panel = useRef()
+  useTrap(!!p, panel)
   useEffect(() => { p ? lenis?.stop() : lenis?.start(); const k = e => e.key === 'Escape' && setP(null); addEventListener('keydown', k); return () => removeEventListener('keydown', k) }, [p])
   return (
     <section id="team" className="sec">
@@ -181,7 +253,7 @@ function Team() {
       </div>
       <div className={`drawer tm ${p ? 'open' : ''}`} aria-hidden={!p}>
         <div className="veil" onClick={() => setP(null)} />
-        <aside role="dialog" aria-label={p?.name}>
+        <aside role="dialog" aria-label={p?.name} ref={panel}>
           {p && <><button className="x" onClick={() => setP(null)}>Close</button>
             <img src={p.img} alt={p.name} /><h3 className="h3">{p.name}</h3><p className="role" {...html(p.role)} />
             <dl>{p.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></>}
@@ -192,7 +264,7 @@ function Team() {
 
 const Approach = () => (
   <section id="approach" className="sec dark approach-sec">
-    <div className="approach-bg" aria-hidden="true"><video src={U('/video/approach.mp4')} poster={U('/video/approach-poster.jpg')} muted loop playsInline autoPlay preload="metadata" /></div>
+    <div className="approach-bg" aria-hidden="true"><BgVideo src={U('/video/approach.mp4')} poster={U('/video/approach-poster.jpg')} /></div>
     <div className="approach-scrim" aria-hidden="true" />
     <div className="wrap split">
       <div className="stick"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
@@ -259,7 +331,9 @@ function CoModal({ d }) {
 
 function Portfolio() {
   const [sel, setSel] = useState(-1)
+  const panel = useRef()
   const f = sel >= 0 ? C.feat[sel] : null
+  useTrap(sel >= 0, panel)
   useEffect(() => {
     if (!f) return
     const k = e => e.key === 'Escape' && setSel(-1)
@@ -285,7 +359,7 @@ function Portfolio() {
       </div>
       <div className={`modal co ${sel >= 0 ? 'open' : ''}`} aria-hidden={sel < 0}>
         <div className="veil" onClick={() => setSel(-1)} />
-        <div className="mcard" role="dialog" aria-label={f ? f.name : 'Company details'}>
+        <div className="mcard" role="dialog" aria-label={f ? f.name : 'Company details'} ref={panel}>
           {f && <>
             <button className="x" onClick={() => setSel(-1)} aria-label="Close">&times;</button>
             <CoModal d={coData(f)} />
@@ -316,7 +390,7 @@ function Investors() {
         <div className="panel" id={`panel-${t}`} role="tabpanel" aria-labelledby={`tab-${t}`} tabIndex={0} key={t}>
           {t === 0 && <div className="faq-list">{C.faq.map((f, i) => { const on = qs.has(i); return (
             <div key={i} className={`faq ${on ? 'on' : ''}`}><button id={`faq-q-${i}`} aria-expanded={on} aria-controls={`faq-a-${i}`} onClick={() => toggle(i)}><span>{f.q}</span><i aria-hidden="true" /></button><div className="ans" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}><div><p {...html(f.a)} /></div></div></div>) })}</div>}
-          {t === 1 && <><p className="note first">Policies of Anchorage Capital and its schemes. Copies are available on request.</p>{C.pol.map(p => <div key={p.t} className="pol"><div><h3>{p.t}</h3><p>{p.d}</p></div><a className="ul" href={`mailto:investor@anchoragealpha.com?subject=${encodeURIComponent('Request a copy: ' + p.t)}`}>Request a copy<small>{p.meta}</small></a></div>)}</>}
+          {t === 1 && <><p className="note first">Policies of Anchorage Capital and its schemes, available to download below.</p>{C.pol.map(p => <div key={p.t} className="pol"><div><h3>{p.t}</h3><p>{p.d}</p></div><div className="pol-act"><a className="dl" href={p.href} download aria-label={`Download ${p.t}`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19h14"/></svg>Download PDF</a><small>{p.meta}</small></div></div>)}</>}
           {t === 2 && <><p className="note first">{C.defs.note}</p><dl className="defs">{C.defs.items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></>}
         </div>
       </div>
@@ -325,6 +399,8 @@ function Investors() {
 
 const Contact = () => {
   const [doc, setDoc] = useState(null)
+  const panel = useRef()
+  useTrap(!!doc, panel)
   useEffect(() => {
     if (!doc) return
     const k = e => e.key === 'Escape' && setDoc(null)
@@ -379,16 +455,19 @@ const Contact = () => {
           </dl>
         </Rv>
       <footer onClick={e => { if (e.target.closest('.nw')) { e.preventDefault(); setDoc('legal'); } }}>
-        <div className="foot-main">{C.footer.map((p, i) => <p key={i} {...html(p)} />)}</div>
-        <nav className="foot-links" aria-label="Legal and privacy">
-          <button type="button" className="foot-link" onClick={() => setDoc('legal')}>Legal information</button>
-          <button type="button" className="foot-link" onClick={() => setDoc('privacy')}>Privacy</button>
-        </nav>
+        <div className="foot-top">
+          <p className="foot-copy">{C.footer[2]}</p>
+          <nav className="foot-links" aria-label="Legal and privacy">
+            <button type="button" className="foot-link" onClick={() => setDoc('legal')}>Legal information</button>
+            <button type="button" className="foot-link" onClick={() => setDoc('privacy')}>Privacy</button>
+          </nav>
+        </div>
+        <div className="foot-main">{C.footer.slice(0, 2).map((p, i) => <p key={i} {...html(p)} />)}</div>
       </footer>
     </div>
     <div className={`drawer doc ${doc ? 'open' : ''}`} aria-hidden={!doc}>
       <div className="veil" onClick={() => setDoc(null)} />
-      <aside role="dialog" aria-label={doc === 'privacy' ? 'Privacy' : 'Legal information'}>
+      <aside role="dialog" aria-label={doc === 'privacy' ? 'Privacy' : 'Legal information'} ref={panel}>
         {doc && <><button className="x" onClick={() => setDoc(null)}>Close</button>
           <h3 className="h3">{doc === 'privacy' ? 'Privacy' : 'Legal information'}</h3>
           {(doc === 'privacy' ? C.privacy : C.legal).map((p, i) => <p key={i} className="doc-p" {...html(p)} />)}</>}
@@ -400,9 +479,10 @@ const Contact = () => {
 const ToTop = () => {
   const [show, setShow] = useState(false)
   useEffect(() => {
-    const on = () => setShow(window.scrollY > window.innerHeight * 0.9)
+    let raf = 0
+    const on = () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; setShow(window.scrollY > window.innerHeight * 0.9) }) }
     addEventListener('scroll', on, { passive: true }); on()
-    return () => removeEventListener('scroll', on)
+    return () => { removeEventListener('scroll', on); cancelAnimationFrame(raf) }
   }, [])
   return (
     <button
@@ -426,6 +506,11 @@ export default function App() {
     window.__lenis = lenis
     lenis.scrollTo(0, { immediate: true })
     let raf; const loop = (t) => { lenis.raf(t); raf = requestAnimationFrame(loop) }; raf = requestAnimationFrame(loop)
+    const onVis = () => {
+      if (document.hidden) { cancelAnimationFrame(raf); raf = 0; return }
+      if (!raf) raf = requestAnimationFrame(loop)
+    }
+    document.addEventListener('visibilitychange', onVis)
     const root = document.documentElement
     const on = () => {
       const y = scrollY, h = innerHeight, max = root.scrollHeight - h
@@ -435,7 +520,7 @@ export default function App() {
     lenis.on('scroll', on); on()
     const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && setActive(e.target.id)), { rootMargin: '-45% 0px -50% 0px' })
     NAV.forEach(([id]) => io.observe(document.getElementById(id)))
-    return () => { cancelAnimationFrame(raf); lenis.destroy(); io.disconnect() }
+    return () => { if (raf) cancelAnimationFrame(raf); document.removeEventListener('visibilitychange', onVis); lenis.destroy(); io.disconnect() }
   }, [])
   return <><a className="a11y-skip" href="#a11y-main">Skip to main content</a><Nav active={active} solid={solid} /><main id="a11y-main" tabIndex={-1}><Hero /><About /><Legacy /><Team /><Approach /><Portfolio /><Investors /><Contact /></main><ToTop /></>
 }

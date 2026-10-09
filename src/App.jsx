@@ -169,7 +169,7 @@ function Team() {
           </button></Rv>))}</div>
         <p className="note">{C.team.note}</p>
       </div>
-      <div className={`drawer ${p ? 'open' : ''}`} aria-hidden={!p}>
+      <div className={`drawer tm ${p ? 'open' : ''}`} aria-hidden={!p}>
         <div className="veil" onClick={() => setP(null)} />
         <aside role="dialog" aria-label={p?.name}>
           {p && <><button className="x" onClick={() => setP(null)}>Close</button>
@@ -190,32 +190,49 @@ const Approach = () => (
   </section>)
 
 function Portfolio() {
-  const [open, setOpen] = useState(-1)
+  const [sel, setSel] = useState(-1)
+  const f = sel >= 0 ? C.feat[sel] : null
+  useEffect(() => {
+    if (!f) return
+    const k = e => e.key === 'Escape' && setSel(-1)
+    addEventListener('keydown', k)
+    try { window.__lenis && window.__lenis.stop() } catch (e) {}
+    const x = document.querySelector('.drawer.co .x'); x && x.focus()
+    return () => { removeEventListener('keydown', k); try { window.__lenis && window.__lenis.start() } catch (e) {} }
+  }, [f])
   return (
     <section id="portfolio" className="sec">
       <div className="wrap">
         <SecLabel>A selection of our investments</SecLabel>
         <Rv as="h2" className="h2">Key Investments</Rv>
-        <ul className="inv-grid">{C.grid.map((g, i) => { const f = C.feat[i], on = open === i; return (
-          <Rv as="li" key={g.name} d={i * 40} className={`inv-item ${on ? 'on' : ''}`}>
-            <button className="inv-card" disabled={!f} aria-expanded={f ? on : undefined} onClick={() => setOpen(on ? -1 : i)}>
+        <ul className="inv-grid">{C.grid.map((g, i) => { const d = C.feat[i]; return (
+          <Rv as="li" key={g.name} d={i * 40} className="inv-item">
+            <button className="inv-card" disabled={!d} aria-haspopup="dialog" onClick={() => setSel(i)}>
               <span className="inv-logo"><img src={g.logo} alt="" loading="lazy" /></span>
               <span className="inv-name">{g.name}</span>
               <span className="inv-d">{g.d}</span>
-              {f && <svg className="inv-arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+              {d && <svg className="inv-arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             </button>
-            {f && <div className="more"><div><div className="more-in">
-              <div><p className="tag">{f.tag}</p>{f.url && <a className="ul" href={f.url} target="_blank" rel="noopener">Explore company</a>}</div>
-              <ul>{f.pts.map((p, k) => <li key={k}>{p}</li>)}</ul>
-              <blockquote><p>{f.q}</p><footer><b>{f.who}</b> {f.role}</footer></blockquote>
-            </div></div></div>}
           </Rv>) })}</ul>
+      </div>
+      <div className={`drawer co ${sel >= 0 ? 'open' : ''}`} aria-hidden={sel < 0}>
+        <div className="veil" onClick={() => setSel(-1)} />
+        <aside role="dialog" aria-label={f ? f.name : 'Company details'}>
+          {f && <><button className="x" onClick={() => setSel(-1)}>Close</button>
+            <img className="co-logo" src={f.logo} alt={f.name} />
+            <h3 className="h3">{f.name}</h3>
+            <p className="tag">{f.tag}</p>
+            {f.url && <a className="ul" href={f.url} target="_blank" rel="noopener">Explore company</a>}
+            <ul className="co-pts">{f.pts.map((p, k) => <li key={k}>{p}</li>)}</ul>
+            <blockquote><p>{f.q}</p><footer><b>{f.who}</b> {f.role}</footer></blockquote>
+          </>}
+        </aside>
       </div>
     </section>)
 }
 
 function Investors() {
-  const T = ['FAQs', 'Policies', 'Definitions', 'Legal', 'Privacy'], [t, setT] = useState(0), [qs, setQs] = useState(() => new Set())
+  const T = ['FAQs', 'Policies', 'Definitions'], [t, setT] = useState(0), [qs, setQs] = useState(() => new Set())
   const refs = useRef([]), [ind, setInd] = useState({ x: 0, w: 0 })
   useLayoutEffect(() => { const e = refs.current[t]; e && setInd({ x: e.offsetLeft, w: e.offsetWidth }) }, [t])
   const toggle = (i) => setQs(s => { const n = new Set(s); n.has(i) ? n.delete(i) : n.add(i); return n })
@@ -237,8 +254,6 @@ function Investors() {
             <div key={i} className={`faq ${on ? 'on' : ''}`}><button id={`faq-q-${i}`} aria-expanded={on} aria-controls={`faq-a-${i}`} onClick={() => toggle(i)}><span>{f.q}</span><i aria-hidden="true" /></button><div className="ans" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}><div><p {...html(f.a)} /></div></div></div>) })}</div>}
           {t === 1 && <><p className="note first">Policies of Anchorage Capital and its schemes, available to download as PDF.</p>{C.pol.map(p => <div key={p.t} className="pol"><div><h3>{p.t}</h3><p>{p.d}</p></div><a href={p.href} download className="ul">Download<small>{p.meta}</small></a></div>)}</>}
           {t === 2 && <><p className="note first">{C.defs.note}</p><dl className="defs">{C.defs.items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></>}
-          {t === 3 && <div className="prose">{C.legal.map((p, i) => <p key={i} {...html(p)} />)}</div>}
-          {t === 4 && <div className="prose">{C.privacy.map((p, i) => <p key={i} {...html(p)} />)}</div>}
         </div>
       </div>
     </section>)
@@ -257,7 +272,10 @@ const Contact = () => (
         <div><h3>Fund &amp; regulatory</h3><p><b>Fund:</b> Anchorage Capital</p><p><b>Category:</b> Category II AIF</p><p><b>SEBI registration:</b> IN/AIF2/21-22/1003</p><p><b>Sponsor:</b> Rohit Kothari</p><p><b>Investment manager:</b> Anchorage Alpha Investments Advisor Private Limited</p><p><b>Trustee:</b> Orbis Trusteeship Services Private Limited</p><p><b>Compliance officer:</b> Bhaven Jain</p></div>
         <div id="grievance"><h3>Investor grievance redressal</h3><p>SEBI SCORES<br /><a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener">https://scores.sebi.gov.in/</a></p><p>Online Dispute Resolution Portal<br /><a href="https://smartodr.in/" target="_blank" rel="noopener">https://smartodr.in/</a></p></div>
       </div>
-      <footer>{C.footer.map((p, i) => <p key={i} {...html(p)} />)}</footer>
+          <footer>{C.footer.map((p, i) => <p key={i} {...html(p)} />)}
+            <div className="foot-legal" id="legal">{C.legal.map((p, i) => <p key={i} {...html(p)} />)}</div>
+            <div className="foot-privacy">{C.privacy.map((p, i) => <p key={i} {...html(p)} />)}</div>
+          </footer>
     </div>
   </section>)
 

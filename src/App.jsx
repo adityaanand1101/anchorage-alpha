@@ -220,7 +220,7 @@ function Portfolio() {
       <div className={`modal co ${sel >= 0 ? 'open' : ''}`} aria-hidden={sel < 0}>
         <div className="veil" onClick={() => setSel(-1)} />
         <div className="mcard" role="dialog" aria-label={f ? f.name : 'Company details'}>
-          {f && <><button className="x" onClick={() => setSel(-1)} aria-label="Close">\u00d7</button>
+          {f && <><button className="x" onClick={() => setSel(-1)} aria-label="Close">&times;</button>
             <img className="co-logo" src={f.logo} alt={f.name} />
             <h3 className="h3">{f.name}</h3>
             <p className="tag">{f.tag}</p>

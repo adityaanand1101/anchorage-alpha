@@ -94,8 +94,8 @@ sup{font-size:.45em;vertical-align:super;margin-left:.1em}
 
 /* team */
 .head2{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end;margin-bottom:3rem}.head2 .lede{margin:0}
-.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2rem 1.4rem}
-.card{display:block;width:100%}.ph{display:block;width:min(100%,168px);aspect-ratio:1;overflow:hidden;background:var(--tint)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2.2rem 1.6rem}
+.card{display:block;width:100%}.ph{display:block;aspect-ratio:4/5;overflow:hidden;background:var(--tint)}
 .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
 .card:hover img,.card:focus-visible img{transform:scale(1.045)}
 .nm{display:block;margin-top:1rem;font:400 1.15rem var(--serif)}.rl{display:block;margin-top:.3rem;font-size:.78rem;line-height:1.5;color:var(--mist)}
@@ -113,7 +113,7 @@ sup{font-size:.45em;vertical-align:super;margin-left:.1em}
 .modal .x{position:absolute;top:1.1rem;right:1.3rem;width:36px;height:36px;border-radius:50%;border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;font-size:1.15rem;line-height:1;color:var(--deep);background:#fff}
 .modal .x:hover{background:var(--tint)}
 .modal .x:focus-visible{outline:2px solid var(--sand);outline-offset:2px}
-.drawer.tm aside img{width:100%;aspect-ratio:1;object-fit:cover;margin-bottom:1.8rem}
+.drawer.tm aside img{display:block;width:min(100%,190px);aspect-ratio:1;object-fit:cover;margin:0 auto 1.6rem}
 .modal .co-logo{width:auto;max-width:180px;height:44px;aspect-ratio:auto;object-fit:contain;margin:0 0 .4rem}.role{margin-top:.6rem;color:var(--ocean);font-style:italic;font-family:var(--serif)}
 dl{margin-top:2rem}dl>div{display:grid;grid-template-columns:120px 1fr;gap:1rem;padding:.9rem 0;border-top:1px solid var(--hair);font-size:.9rem}dt{color:var(--mist);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;padding-top:.15rem}
 @media(max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}.head2{grid-template-columns:1fr}}@media(max-width:560px){.grid{grid-template-columns:repeat(2,1fr);gap:2.4rem 1rem}}

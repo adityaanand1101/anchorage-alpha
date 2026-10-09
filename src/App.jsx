@@ -201,16 +201,16 @@ const Approach = () => (
     </div>
   </section>)
 
-const CO_ICONS = {
-  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 5 13.5h5L10.5 22 19 10.5h-5z"/></svg>',
-  trend: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5.5-5.5 3.5 3.5L21 6"/><path d="M15 6h6v6"/></svg>',
-  build: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V9.5l5 3.2V9.5l5 3.2V5.5h4V21"/><path d="M9 17h1.5M13.5 17H15"/></svg>'
-}
+const CO_ICON_BOLT = <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M13 2 5 13.5h5L10.5 22 19 10.5h-5z"/></svg>
+const CO_ICON_TREND = <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 17l5.5-5.5 3.5 3.5L21 6"/><path d="M15 6h6v6"/></svg>
+const CO_ICON_BUILD = <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V9.5l5 3.2V9.5l5 3.2V5.5h4V21"/><path d="M9 17h1.5M13.5 17H15"/></svg>
+const CO_BUILD_WORDS = ['manufactur', 'facilit', 'plant', 'capex', 'infrastructur', 'capacity', 'network', 'platform', 'hardware', 'device', 'energy', 'solar', 'mining', 'resource', 'logistic', 'building', 'units', 'recycling', 'steel', 'wire']
+const CO_TREND_WORDS = ['scal', 'grow', 'expansion', 'expanding', 'demand', 'record', 'accelerat', 'adoption', 'uptime', 'return', 'revenue', 'margin', 'valuation']
 const coIcon = t => {
   const s = (t || '').toLowerCase()
-  if (/\b(platform|network|facilit|plant|capex|manufactur|infrastructure|capacity|energy|solar|mining|resources|logistics|hardware|device|devic)\b/.test(s)) return CO_ICONS.build
-  if (/\b(scale|scaling|grow|growth|expansion|demand|record|accelerat|adoption|uptime|return)\b/.test(s)) return CO_ICONS.trend
-  return CO_ICONS.bolt
+  if (CO_BUILD_WORDS.some(k => s.includes(k))) return CO_ICON_BUILD
+  if (CO_TREND_WORDS.some(k => s.includes(k))) return CO_ICON_TREND
+  return CO_ICON_BOLT
 }
 
 function Portfolio() {
@@ -246,7 +246,7 @@ function Portfolio() {
             <button className="x" onClick={() => setSel(-1)} aria-label="Close">&times;</button>
             <div className="co-grid">
               <div className="co-side">
-                <img className="co-logo" src={f.logo} alt={f.name} />
+                <img className="co-logo" src={f.logo} alt="" />
                 <h3 className="co-name">{f.name}</h3>
                 <span className="co-rule" aria-hidden="true" />
                 <p className="co-tag">{f.tag}</p>

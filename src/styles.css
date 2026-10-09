@@ -124,6 +124,8 @@ dl{margin-top:2rem}dl>div{display:grid;grid-template-columns:120px 1fr;gap:1rem;
 .princ h3{font:italic 400 clamp(1.6rem,2.8vw,2.3rem)/1.15 var(--serif);transition:color .5s,transform .7s var(--ease)}
 .princ p{margin-top:.9rem;max-width:46ch;line-height:1.75;color:rgba(250,247,242,.66)}
 .princ li:hover h3{color:var(--sand);transform:translateX(10px)}.princ:hover li.rv.in:not(:hover){opacity:.42}
+.approach-video{margin:clamp(3rem,6vw,5rem) auto 0;max-width:1240px;padding:0 var(--gut)}
+.approach-video video{display:block;width:100%;aspect-ratio:16/9;max-height:440px;object-fit:cover}
 @media(max-width:860px){.split{grid-template-columns:1fr}.stick{position:static}}
 
 /* investments */

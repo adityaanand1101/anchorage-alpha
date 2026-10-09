@@ -127,7 +127,7 @@ dl{margin-top:1.6rem}dl>div{display:grid;grid-template-columns:120px 1fr;gap:1re
 .princ li:hover h3{color:var(--sand);transform:translateX(10px)}.princ:hover li.rv.in:not(:hover){opacity:.42}
 /* static background video for the approach section (no motion, no zoom) */
 .approach-bg{position:absolute;inset:0;z-index:0}
-.approach-bg video{width:100%;height:100%;object-fit:contain;transform:scale(.62)}
+.approach-bg video{width:100%;height:100%;object-fit:cover}
 .approach-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(11,31,51,.22),rgba(11,31,51,.06) 45%,rgba(11,31,51,.3))}
 .approach-sec .wrap{position:relative;z-index:2}
 @media(max-width:860px){.split{grid-template-columns:1fr}.stick{position:static}}

@@ -335,16 +335,49 @@ const Contact = () => {
   return (
   <section id="contact" className="sec dark">
     <div className="wrap">
-        <Label>Contact</Label>
-        <Rv as="h2" className="h1">Get in touch.</Rv>
-      <Rv as="p" d={120} className="lede">For investor enquiries, write to the team directly.</Rv>
-      <a className="mail" href="mailto:investor@anchoragealpha.com">investor@anchoragealpha.com</a>
-      <div className="cols">
-        <div><h3>Office</h3><address>209/210, 2nd Floor, Arcadia Building<br />NCPA Marg, Nariman Point<br />Mumbai, Maharashtra 400021<br /><a href="tel:+912240198600">022-40198600</a></address></div>
-        <div><h3>Enquiries</h3><p><b>Investors:</b> <a href="mailto:investor@anchoragealpha.com">investor@anchoragealpha.com</a></p><p><b>General:</b> <a href="mailto:contact@anchoragealpha.com">contact@anchoragealpha.com</a></p></div>
-        <div><h3>Fund &amp; regulatory</h3><p><b>Fund:</b> Anchorage Capital</p><p><b>Category:</b> Category II AIF</p><p><b>SEBI registration:</b> IN/AIF2/21-22/1003</p><p><b>Sponsor:</b> Rohit Kothari</p><p><b>Investment manager:</b> Anchorage Alpha Investments Advisor Private Limited</p><p><b>Trustee:</b> Orbis Trusteeship Services Private Limited</p><p><b>Compliance officer:</b> Bhaven Jain</p></div>
-        <div id="grievance"><h3>Investor grievance redressal</h3><p>SEBI SCORES<br /><a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener">https://scores.sebi.gov.in/</a></p><p>Online Dispute Resolution Portal<br /><a href="https://smartodr.in/" target="_blank" rel="noopener">https://smartodr.in/</a></p></div>
-      </div>
+        <div className="ct-lead">
+          <div className="ct-intro">
+            <Label>Contact</Label>
+            <Rv as="h2" className="h1">Get in touch.</Rv>
+            <Rv as="p" d={120} className="lede">For investor enquiries, write to the team directly.</Rv>
+          </div>
+          <Rv d={180} className="ct-direct">
+            <h3 className="ct-kicker">Direct</h3>
+            <a className="ct-mail" href="mailto:investor@anchoragealpha.com">
+              <span>investor@anchoragealpha.com</span>
+              <svg className="ct-arrow" width="18" height="18" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </a>
+          </Rv>
+        </div>
+        <div className="ct-facts">
+          <Rv d={0} className="ct-fact">
+            <h3><span className="ct-idx" aria-hidden="true">01</span>Office</h3>
+            <address>209/210, 2nd Floor, Arcadia Building<br />NCPA Marg, Nariman Point<br />Mumbai, Maharashtra 400021</address>
+            <p><a href="tel:+912240198600">022-40198600</a></p>
+          </Rv>
+          <Rv d={90} className="ct-fact">
+            <h3><span className="ct-idx" aria-hidden="true">02</span>Enquiries</h3>
+            <p><b>Investors</b><a href="mailto:investor@anchoragealpha.com">investor@anchoragealpha.com</a></p>
+            <p><b>General</b><a href="mailto:contact@anchoragealpha.com">contact@anchoragealpha.com</a></p>
+          </Rv>
+          <Rv d={180} className="ct-fact" id="grievance">
+            <h3><span className="ct-idx" aria-hidden="true">03</span>Grievance redressal</h3>
+            <p><b>SEBI SCORES</b><a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener">scores.sebi.gov.in</a></p>
+            <p><b>Dispute portal</b><a href="https://smartodr.in/" target="_blank" rel="noopener">smartodr.in</a></p>
+          </Rv>
+        </div>
+        <Rv d={0} className="ct-reg">
+          <h3 className="ct-kicker">Fund &amp; regulatory</h3>
+          <dl>
+            <div><dt>Fund</dt><dd>Anchorage Capital</dd></div>
+            <div><dt>Category</dt><dd>Category II AIF</dd></div>
+            <div><dt>SEBI registration</dt><dd>IN/AIF2/21-22/1003</dd></div>
+            <div><dt>Sponsor</dt><dd>Rohit Kothari</dd></div>
+            <div><dt>Investment manager</dt><dd>Anchorage Alpha Investments Advisor Private Limited</dd></div>
+            <div><dt>Trustee</dt><dd>Orbis Trusteeship Services Private Limited</dd></div>
+            <div><dt>Compliance officer</dt><dd>Bhaven Jain</dd></div>
+          </dl>
+        </Rv>
       <footer onClick={e => { if (e.target.closest('.nw')) { e.preventDefault(); setDoc('legal'); } }}>
         <div className="foot-main">{C.footer.map((p, i) => <p key={i} {...html(p)} />)}</div>
         <nav className="foot-links" aria-label="Legal and privacy">

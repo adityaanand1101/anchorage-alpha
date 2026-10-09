@@ -99,7 +99,23 @@
 #a11y .a11y-dict a{display:inline-block;margin-top:6px;color:var(--d);text-decoration:underline;font-weight:600}
 
 @media(max-width:560px){
-  #a11y .a11y-panel{left:10px;right:10px;width:auto;bottom:86px;max-height:calc(100vh - 168px)}
+  #a11y .a11y-panel{left:10px;right:10px;width:auto;bottom:82px;max-height:calc(100vh - 156px)}
+  #a11y .a11y-trigger{left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:52px;height:52px}
+  #a11y .a11y-trigger svg{width:25px;height:25px}
+  #a11y .a11y-head{padding:10px 12px;border-radius:12px 12px 0 0}
+  #a11y .a11y-title{font-size:13px}
+  #a11y .a11y-hbtn{width:28px;height:28px}
+  #a11y .a11y-body{padding:10px;gap:10px}
+  #a11y .a11y-card{padding:12px}
+  #a11y .a11y-card h3{font-size:12px}
+  #a11y .a11y-grid{gap:7px}
+  #a11y .a11y-tl{min-height:92px;padding:14px 6px 8px;gap:4px}
+  #a11y .a11y-tl svg{width:24px;height:24px}
+  #a11y .a11y-tl .lb{font-size:12.5px}
+  #a11y .a11y-tl .st{font-size:10.5px}
+  #a11y .a11y-info{top:5px;left:5px;width:22px;height:22px;font-size:12px}
+  #a11y .a11y-desc{font-size:11px}
+  #a11y .a11y-foot{padding:9px 12px;font-size:11px}
 }
 
 /* ===================== 2. SITE-LEVEL OVERRIDES ===================== */

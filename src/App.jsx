@@ -197,7 +197,7 @@ const Approach = () => (
     <div className="wrap split">
       <div className="stick"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
       <ul className="princ">{C.approach.map((a, i) => (
-        <Rv as="li" key={i} d={i % 2 ? 80 : 0}><h3>{a.h}</h3><p>{a.p}</p></Rv>))}</ul>
+        <Rv as="li" key={i} d={i * 110}><h3>{a.h}</h3><p>{a.p}</p></Rv>))}</ul>
     </div>
   </section>)
 

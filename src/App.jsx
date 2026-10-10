@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, memo } from 'react'
 import Lenis from 'lenis'
 import C0 from './content.json'
+import { Split, DepthMeter } from './v2.jsx'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const U = p => BASE + p
@@ -175,7 +176,7 @@ function Count({ html: h }) {
 }
 
 /* Hero video: two stacked players, the next one smoothly fades in over the last 1.4s of the current one */
-function LoopVideo() {
+function LoopVideo({ src = '/video/hero.mp4', poster = '/video/poster.jpg' }) {
   const containerRef = useRef(null)
   const A = useRef(null)
   const B = useRef(null)
@@ -291,15 +292,15 @@ function LoopVideo() {
     muted: true,
     playsInline: true,
     preload: 'auto',
-    poster: U('/video/poster.jpg'),
+    poster: U(poster),
     'aria-hidden': true,
     disablePictureInPicture: true
   }
 
   return (
     <div ref={containerRef} className="vid">
-      <video ref={A} className="on" {...p}><source src={U('/video/hero.mp4')} type="video/mp4" /></video>
-      <video ref={B} {...p}><source src={U('/video/hero.mp4')} type="video/mp4" /></video>
+      <video ref={A} className="on" {...p}><source src={U(src)} type="video/mp4" /></video>
+      <video ref={B} {...p}><source src={U(src)} type="video/mp4" /></video>
     </div>
   )
 }
@@ -421,38 +422,56 @@ const Hero = memo(() => (
 ))
 
 const About = memo(() => {
-  const a = C.about
+  const a = C.about, k = useSeen()
   return (
-    <section id="about" className="sec">
+    <section id="about" className="sec bgsec about">
+      <div className="bg" aria-hidden="true"><div className="bgimg"><div className="side-meta"><span>India</span><span>Growth capital</span><span>Since 2022</span></div></div></div>
       <div className="wrap">
         <Label>About us</Label>
-        <div className="two">
-          <div>
-            <Rv as="h2" className="h2">{a.h}</Rv>
-            {a.p.map((p, i) => <Rv key={i} as="p" d={120 * (i + 1)} className="lede" {...html(p)} />)}
-          </div>
-          <Unveil src={a.img} alt="A stone loggia opening onto calm water at sunset" className="wide" />
-        </div>
+        <Split text={a.h} className="h2" seenRef={k} />
+        {a.p.map((p, i) => <Rv key={i} as="p" d={500 + 160 * i} className="lede blurin" {...html(p)} />)}
+      </div>
+    </section>
+  )
+})
+
+const Schemes = memo(() => {
+  const a = C.about
+  const aum = a.schemes[3]
+  const [usd, inr] = aum.n.replace('*', '').split('\u20B9')
+  const [hot, setHot] = useState(-1)
+  const orb = useRef(null)
+  const tilt = e => {
+    const r = orb.current.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height
+    const o = orb.current.style
+    o.setProperty('--mx', x * 100 + '%'); o.setProperty('--my', y * 100 + '%')
+    o.setProperty('--ry', (x - .5) * 14 + 'deg'); o.setProperty('--rx', (.5 - y) * 14 + 'deg')
+  }
+  const rest = () => { const o = orb.current.style; o.setProperty('--rx', '0deg'); o.setProperty('--ry', '0deg'); o.setProperty('--mx', '35%'); o.setProperty('--my', '25%') }
+  return (
+    <section id="schemes" className="sec bgsec schemes-sec">
+      <div className="bg" aria-hidden="true" />
+      <div className="wrap">
         <SecLabel>Our schemes</SecLabel>
-        <div className="schemes">
-          {a.schemes.map((s, i) => {
-            const aum = /AUM/.test(s.l)
-            const [usd, inr] = s.n.replace('*', '').split('\u20B9')
-            const date = s.d.replace(/^Inception\s*/, '')
-            return (
-              <Rv key={i} d={i * 90} className={`scheme ${aum ? 'aum' : ''}`}>
-                <span className="k">{s.l}</span>
-                {aum
-                  ? <><span className="big"><span className="val">{usd.trim()}<sup>*</sup></span><i className="vsep" aria-hidden="true" /><span className="inr">{'\u20B9'}{inr}</span></span></>
-                  : <span className="big">{s.n}</span>}
-                <span className="sdiv" aria-hidden="true" />
-                <span className="sfoot">
-                  <span className="foot-k">{aum ? s.d : 'Inception'}</span>
-                  {!aum && <span className="foot-v">{date}</span>}
-                </span>
-              </Rv>
-            )
-          })}
+        <div className={`sch-wrap ${hot >= 0 ? 'hot' : ''}`}>
+          <svg className="sch-links" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+            <path className={hot === 0 ? 'on' : ''} d="M120 60 C 300 -20, 620 -20, 835 90" /><path className={hot === 1 ? 'on' : ''} d="M385 60 C 520 20, 700 40, 830 130" /><path className={hot === 2 ? 'on' : ''} d="M650 60 C 720 90, 790 150, 825 175" />
+          </svg>
+          {a.schemes.slice(0, 3).map((s, i) => (
+            <Rv key={i} d={i * 120} className={`sch-card ${hot === i ? 'is-hot' : ''}`} onMouseEnter={() => setHot(i)} onMouseLeave={() => setHot(-1)} onFocus={() => setHot(i)} onBlur={() => setHot(-1)} tabIndex={0}>
+              <span className="k">{s.l}</span>
+              <span className="big">{s.n}</span>
+              <span className="sdiv" aria-hidden="true" />
+              <span className="sfoot"><span>Inception</span><b>{s.d.replace(/^Inception\s*/, '')}</b></span>
+              <i className="dot" aria-hidden="true" />
+            </Rv>
+          ))}
+          <Rv d={420} className="orb-w"><div ref={orb} className="orb" onMouseMove={tilt} onMouseLeave={rest}>
+            <span className="k">{aum.l}</span>
+            <span className="val">{usd.trim()}<sup>*</sup></span>
+            <span className="inr">{'\u20B9'}{inr}</span>
+            <span className="k">{aum.d}</span>
+          </div></Rv>
         </div>
         <p className="note" {...html(a.note)} />
       </div>
@@ -461,30 +480,40 @@ const About = memo(() => {
 })
 
 const Legacy = memo(() => {
-  const l = C.legacy, f = C.founder
+  const l = C.legacy, k = useSeen()
+  const [more, setMore] = useState(false)
   return (
-    <section id="legacy" className="sec tint">
+    <section id="legacy" className="sec bgsec legacy-sec">
+      <div className="bg" aria-hidden="true" />
       <div className="wrap">
-        <Label>Legacy</Label>
-        <div className="two flip">
-          <Unveil src={l.img} alt="Sunrise over calm water" className="tall" />
-          <div>
-            <Rv as="h2" className="h2">{l.h}</Rv>
-            <Rv as="p" d={100} className="sub-h">{l.sub}</Rv>
-            {l.p.map((p, i) => <Rv key={i} as="p" d={160 + i * 100} className="lede">{p}</Rv>)}
-          </div>
+        <div className="panel-g">
+          <Label>Legacy</Label>
+          <Split text={l.h} className="h2" seenRef={k} />
+          <Rv as="p" d={500} className="sub-h">{l.sub}</Rv>
+          {l.p.slice(0, 2).map((p, i) => <Rv key={i} as="p" d={600 + i * 120} className="lede blurin">{p}</Rv>)}
+          <div className={`more ${more ? 'open' : ''}`}><div>{l.p.slice(2).map((p, i) => <p key={i} className="lede">{p}</p>)}</div></div>
+          <button type="button" className="rm" aria-expanded={more} onClick={() => setMore(!more)}><span>{more ? 'Read less' : 'Read more'}</span><i /></button>
         </div>
         <div className="stats">{l.stats.map((s, i) => <div key={i} className="stat"><Count html={s.b} /><span>{s.s}</span>{s.e && <em>{s.e}</em>}</div>)}</div>
         <p className="note">* Assets under management of the sponsor group and the Kothari family office, including listed and unlisted holdings.</p>
-        <div className="founder">
-          <Unveil src={f.img} alt={f.name} className="portrait" />
-          <div>
-            <Label>{f.role}</Label>
-            <Rv as="h3" className="h3">{f.name}</Rv>
-            {f.p.map((p, i) => <Rv key={i} as="p" d={i * 100} className="body">{p}</Rv>)}
-            <div className="chips">{f.chips.map(c => <span key={c}>{c}</span>)}</div>
-          </div>
+      </div>
+    </section>
+  )
+})
+
+const Founder = memo(() => {
+  const f = C.founder
+  return (
+    <section id="founder" className="sec bgsec founder-sec">
+      <div className="bg" aria-hidden="true" />
+      <div className="wrap fd">
+        <div className="panel-g">
+          <Label>{f.role}</Label>
+          <Rv as="h3" className="h2">{f.name}</Rv>
+          {f.p.map((p, i) => <Rv key={i} as="p" d={120 + i * 120} className="lede blurin">{p}</Rv>)}
+          <div className="chips">{f.chips.map(c => <span key={c}>{c}</span>)}</div>
         </div>
+        <Unveil src={f.img} alt={f.name} className="arch" />
       </div>
     </section>
   )
@@ -506,7 +535,7 @@ function Team() {
   }, [p])
 
   return (
-    <section id="team" className="sec">
+    <section id="team" className="sec team-sec">
       <div className="wrap">
         <Label>Team</Label>
         <div className="head2">
@@ -534,7 +563,7 @@ function Team() {
 
 const Approach = memo(() => (
   <section id="approach" className="sec dark approach-sec">
-    <div className="approach-bg" aria-hidden="true"><BgVideo src={U('/video/approach.mp4')} poster={U('/video/approach-poster.jpg')} /></div>
+    <div className="approach-bg" aria-hidden="true"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /></div>
     <div className="approach-scrim" aria-hidden="true" />
     <div className="wrap split">
       <div className="stick"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
@@ -960,13 +989,16 @@ export default function App() {
       <main id="a11y-main" tabIndex={-1}>
         <Hero />
         <About />
+        <Schemes />
         <Legacy />
+        <Founder />
         <Team />
         <Approach />
         <Portfolio />
         <Investors />
         <Contact />
       </main>
+      <DepthMeter />
       <ToTop />
     </>
   )

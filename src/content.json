@@ -5,7 +5,7 @@
    "Anchorage Capital is a SEBI-registered Category II Alternative Investment Fund, founded by Rohit Kothari and in operation since 2022. It is managed by Anchorage Alpha Investments Advisor Private Limited.",
    "The fund invests across growth companies in India, largely in the unlisted private space and selectively in listed companies. The theme underlying every investment is the same: businesses that are unique in their space, with a decisive moat, backed by exceptional founders."
   ],
-  "img": "/img/b4c25a322b.jpg",
+  "img": "",
   "schemes": [
    {
     "l": "Anchorage Capital",
@@ -67,7 +67,7 @@
    "With a strong history of entrepreneurship and operational excellence, he built and scaled Aroni Chemicals and Gwalior Chemicals into the world's second-largest producers of aluminium chloride and chlorotoluenes, acquired by Atofina of France in 2004 and LANXESS of Germany in 2008. In 2008, he founded Antique Stock Broking Limited, a leading mid-market brokerage and investment bank.",
    "Today, he serves as Founder & Executive Chairman of Anchorage Alpha, bringing together the perspective of an investor and entrepreneur."
   ],
-  "img": "/img/973736dd94.jpg",
+  "img": "/img/founder-rohit.webp",
   "chips": [
    "Chartered Accountant",
    "MBA, Babson College"
@@ -80,7 +80,7 @@
     "id": "p-mithun-soni",
     "name": "Mithun Soni",
     "role": "Chief Investment Officer",
-    "img": "/img/dbddb5ebef.jpg",
+    "img": "/img/team-dbddb5ebef.webp",
     "facts": [
      [
       "Experience",
@@ -104,7 +104,7 @@
     "id": "p-hetal-khalpada",
     "name": "Hetal Khalpada",
     "role": "Finance Director",
-    "img": "/img/73907cd79d.jpg",
+    "img": "/img/team-73907cd79d.webp",
     "facts": [
      [
       "Experience",
@@ -124,7 +124,7 @@
     "id": "p-nirav-shah",
     "name": "Nirav Shah",
     "role": "Energy, Materials & Infrastructure",
-    "img": "/img/c4bc3d3b73.jpg",
+    "img": "/img/team-c4bc3d3b73.webp",
     "facts": [
      [
       "Experience",
@@ -144,7 +144,7 @@
     "id": "p-rajiv-pathak",
     "name": "Rajiv Pathak",
     "role": "Banking & Financial Services",
-    "img": "/img/0a6040f62a.jpg",
+    "img": "/img/team-0a6040f62a.webp",
     "facts": [
      [
       "Experience",
@@ -164,7 +164,7 @@
     "id": "p-sanket-baheti",
     "name": "Sanket Baheti",
     "role": "Consumer Services & Platforms",
-    "img": "/img/1b279aad13.jpg",
+    "img": "/img/team-1b279aad13.webp",
     "facts": [
      [
       "Experience",
@@ -184,7 +184,7 @@
     "id": "p-nirav-vasa",
     "name": "Nirav Vasa",
     "role": "High-Tech Engineering & Manufacturing Platforms",
-    "img": "/img/72c86ae4ac.jpg",
+    "img": "/img/team-72c86ae4ac.webp",
     "facts": [
      [
       "Experience",
@@ -204,7 +204,7 @@
     "id": "p-karan-shah",
     "name": "Karan Shah",
     "role": "Healthcare, Specialty Chemicals & IT",
-    "img": "/img/4eac93536f.jpg",
+    "img": "/img/team-4eac93536f.webp",
     "facts": [
      [
       "Experience",
@@ -224,7 +224,7 @@
     "id": "p-apratim-raychaudhuri",
     "name": "Apratim Raychaudhuri",
     "role": "Digital Infrastructure & New-Age Technology",
-    "img": "/img/468f99c8ca.jpg",
+    "img": "/img/team-468f99c8ca.webp",
     "facts": [
      [
       "Experience",
@@ -248,7 +248,7 @@
     "id": "p-deepanshu-jain",
     "name": "Deepanshu Jain",
     "role": "Defence & New-Age Technology",
-    "img": "/img/79fc13ab2d.jpg",
+    "img": "/img/team-79fc13ab2d.webp",
     "facts": [
      [
       "Experience",
@@ -272,7 +272,7 @@
     "id": "p-kapil-bhagwat",
     "name": "Kapil Bhagwat",
     "role": "Data Operations Lead",
-    "img": "/img/16d4d94ee2.jpg",
+    "img": "/img/team-16d4d94ee2.webp",
     "facts": [
      [
       "Experience",
@@ -326,12 +326,12 @@
    "logo": "/img/98ccb19196.webp",
    "name": "Nxtra",
    "tag": "Best-in-Class Execution at Scale in India’s AI Infrastructure Build-Out.",
-     "url": "https://www.nxtra.in",
-     "pts3": [
-      "Bharti Airtel's data centre platform and India's largest data centre network, with 14 core and 120+ edge facilities.",
-      "Scaling from ~300 MW towards 1 GW of AI-ready capacity across AI, cloud adoption and data localisation.",
-      "Anchorage invested behind proven execution and scale, alongside Alpha Wave Global and Carlyle in the ~US$1 billion round."
-     ],
+   "url": "https://www.nxtra.in",
+   "pts3": [
+    "Bharti Airtel's data centre platform and India's largest data centre network, with 14 core and 120+ edge facilities.",
+    "Scaling from ~300 MW towards 1 GW of AI-ready capacity across AI, cloud adoption and data localisation.",
+    "Anchorage invested behind proven execution and scale, alongside Alpha Wave Global and Carlyle in the ~US$1 billion round."
+   ],
    "pts": [
     "Bharti Airtel’s data centre platform and India’s largest data centre network, with 14 core and 120+ edge facilities nationwide, combining scaled infrastructure with Airtel’s broader ecosystem advantage.",
     "Scaling from ~300 MW towards 1 GW of AI-ready capacity, led by a high-calibre management team and positioned at the convergence of AI, cloud adoption and data localisation.",
@@ -346,12 +346,12 @@
    "logo": "/img/7004b0e662.webp",
    "name": "Meril Life Sciences",
    "tag": "Ahead of India’s MedTech Inflection.",
-     "url": "https://www.merillife.com",
-     "pts3": [
-      "India's largest medical devices company, with integrated R&D and manufacturing across cardiovascular, orthopaedics and surgical robotics.",
-      "Anchorage identified MedTech early, backing Meril and its founders at the start of its global growth journey.",
-      "Among Meril's earliest institutional backers, investing in 2022 at a ~US$1.8 billion valuation."
-     ],
+   "url": "https://www.merillife.com",
+   "pts3": [
+    "India's largest medical devices company, with integrated R&D and manufacturing across cardiovascular, orthopaedics and surgical robotics.",
+    "Anchorage identified MedTech early, backing Meril and its founders at the start of its global growth journey.",
+    "Among Meril's earliest institutional backers, investing in 2022 at a ~US$1.8 billion valuation."
+   ],
    "pts": [
     "India’s largest medical devices company and a global innovator, with integrated R&D and manufacturing across cardiovascular, orthopaedics, surgical robotics and other advanced medical device categories, including pioneering indigenous technologies such as coronary stents and the Myval TAVR platform.",
     "Anchorage identified MedTech early as a secular growth opportunity, underpinned by strong healthcare tailwinds and an inflection akin to India’s IT sector, backing Meril and its founders at an early stage of their global growth journey.",
@@ -366,12 +366,12 @@
    "logo": "/img/56a1a016f7.webp",
    "name": "Neysa Networks",
    "tag": "Early Access to India’s AI Compute Layer.",
-     "url": "https://neysa.ai",
-     "pts3": [
-      "Founded by Sharad Sanghi, a pioneer of India's commercial data centre industry.",
-      "Sovereign, production-grade AI infrastructure for mission-critical enterprise and government workloads.",
-      "One of India's select AI cloud platforms working with both NVIDIA and AMD."
-     ],
+   "url": "https://neysa.ai",
+   "pts3": [
+    "Founded by Sharad Sanghi, a pioneer of India's commercial data centre industry.",
+    "Sovereign, production-grade AI infrastructure for mission-critical enterprise and government workloads.",
+    "One of India's select AI cloud platforms working with both NVIDIA and AMD."
+   ],
    "pts": [
     "Founded by Sharad Sanghi, a pioneer of India’s commercial data centre industry, bringing deep pedigree in building and scaling digital infrastructure.",
     "Positioned at the heart of India’s AI build-out, providing sovereign, production-grade AI infrastructure for mission-critical enterprise and government workloads.",
@@ -387,12 +387,12 @@
    "logo": "/img/93cde5b01d.webp",
    "name": "Precision Wires",
    "tag": "Growth Capital Behind an Electrification Leader.",
-     "url": "https://precisionwires.in",
-     "pts3": [
-      "One of Asia's leading winding wire manufacturers, with over three decades across Power, EVs, Renewables and Data Centres.",
-      "Anchorage invested at a key inflection point in India's electrification cycle.",
-      "Growth capital funded a record capex programme, accelerating capacity expansion and earnings growth."
-     ],
+   "url": "https://precisionwires.in",
+   "pts3": [
+    "One of Asia's leading winding wire manufacturers, with over three decades across Power, EVs, Renewables and Data Centres.",
+    "Anchorage invested at a key inflection point in India's electrification cycle.",
+    "Growth capital funded a record capex programme, accelerating capacity expansion and earnings growth."
+   ],
    "pts": [
     "One of Asia’s leading winding wire manufacturers, with a track record spanning over three decades and exposure across Power, EVs, Renewables and Data Centres.",
     "Anchorage invested at a key inflection point in India’s electrification cycle, drawing on a deep familiarity with the sector.",
@@ -407,12 +407,12 @@
    "logo": "/img/99d9c8dd14.webp",
    "name": "ACE Insurance Brokers",
    "tag": "Backing a High-Return Specialist in Complex Risk.",
-     "url": "https://aceinsurance.com",
-     "pts3": [
-      "Leading Indian insurance broking and risk advisory platform with over two decades of experience.",
-      "A capital-light, exceptionally high-margin model built on specialist expertise and complex risk structuring.",
-      "Anchorage invested for its specialist franchise and exceptional economics; Blackstone holds a majority stake."
-     ],
+   "url": "https://aceinsurance.com",
+   "pts3": [
+    "Leading Indian insurance broking and risk advisory platform with over two decades of experience.",
+    "A capital-light, exceptionally high-margin model built on specialist expertise and complex risk structuring.",
+    "Anchorage invested for its specialist franchise and exceptional economics; Blackstone holds a majority stake."
+   ],
    "pts": [
     "Leading Indian insurance broking and risk advisory platform, with over two decades of experience and an integrated offering spanning corporate insurance, risk management and reinsurance.",
     "A capital-light, exceptionally high-margin model with superior ROCE, where specialist domain knowledge, complex risk structuring and deep client relationships create a durable competitive moat.",
@@ -427,12 +427,12 @@
    "logo": "/img/990ea266ac.webp",
    "name": "Enviro Infra Engineers",
    "tag": "From Nascent Player to Water Infrastructure Leader.",
-     "url": "https://www.eiel.in",
-     "pts3": [
-      "Integrated water infrastructure across sewage, industrial wastewater and recycling, expanding into desalination and ZLD.",
-      "Positioned in a \u20b920 trillion (~US$240 billion) decade-long opportunity as water becomes critical.",
-      "Anchorage backed Enviro at a nascent stage, well ahead of broader market recognition."
-     ],
+   "url": "https://www.eiel.in",
+   "pts3": [
+    "Integrated water infrastructure across sewage, industrial wastewater and recycling, expanding into desalination and ZLD.",
+    "Positioned in a ₹20 trillion (~US$240 billion) decade-long opportunity as water becomes critical.",
+    "Anchorage backed Enviro at a nascent stage, well ahead of broader market recognition."
+   ],
    "pts": [
     "Integrated water infrastructure player spanning sewage, industrial wastewater and recycling, with in-house capabilities across process design and execution; expanding into Desalination and Zero Liquid Discharge (ZLD) for its next phase of growth.",
     "Positioned in a ₹20 trillion (~US$240 billion) decade-long opportunity, as water becomes an increasingly critical resource across industries, driven by infrastructure investment, industrial demand and tightening wastewater norms.",
@@ -447,12 +447,12 @@
    "logo": "/img/bd8b239384.svg",
    "name": "Thriveni Earthmovers",
    "tag": "Backing a Formidable Operator in Critical Minerals.",
-     "url": "https://thriveni.com",
-     "pts3": [
-      "Built by B. Prabhakaran, now part of the broader Lloyds Metals & Energy ecosystem.",
-      "Positioned across resources critical to industrial growth and the AI economy, with projects in India and DR Congo.",
-      "Proven turnaround specialist, bringing stalled mines to life and rapidly scaling production."
-     ],
+   "url": "https://thriveni.com",
+   "pts3": [
+    "Built by B. Prabhakaran, now part of the broader Lloyds Metals & Energy ecosystem.",
+    "Positioned across resources critical to industrial growth and the AI economy, with projects in India and DR Congo.",
+    "Proven turnaround specialist, bringing stalled mines to life and rapidly scaling production."
+   ],
    "pts": [
     "Built by Mr. B. Prabhakaran, one of the most dynamic and respected founders in the resources sector, Thriveni has grown into an integrated resources platform and is today part of the broader Lloyds Metals & Energy ecosystem.",
     "Positioned across resources critical to industrial growth and the AI economy, spanning iron ore, coal, copper and cobalt, with projects across India and DR Congo and an upcoming project in Papua New Guinea.",
@@ -468,12 +468,12 @@
    "logo": "/img/2f01274676.webp",
    "name": "Qi Cap",
    "tag": "Ahead of the Curve on AI-Native Asset Management.",
-     "url": "https://qicap.ai",
-     "pts3": [
-      "Founded by Amit Rathi, with multi-decade experience across capital and commodity markets.",
-      "Global deeptech platform built on proprietary AI/ML alpha engines, processing ~500 million orders daily.",
-      "Anchorage backed Qi Cap early, before AI-native investing entered the mainstream."
-     ],
+   "url": "https://qicap.ai",
+   "pts3": [
+    "Founded by Amit Rathi, with multi-decade experience across capital and commodity markets.",
+    "Global deeptech platform built on proprietary AI/ML alpha engines, processing ~500 million orders daily.",
+    "Anchorage backed Qi Cap early, before AI-native investing entered the mainstream."
+   ],
    "pts": [
     "Founded by Amit Rathi, bringing multi-decade experience across capital and commodity markets and deep expertise in systematic investing.",
     "Global deeptech platform built around proprietary AI/ML alpha engines and self-learning strategies, combining advanced data science with institutional-scale, low-latency execution; processing ~500 million orders daily with a 100+ member team of IIT-trained engineers and data scientists.",

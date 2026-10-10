@@ -2,6 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './styles.css'
+import './v2.css'
 
 class Boundary extends React.Component {
   state = { hit: false }

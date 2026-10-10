@@ -203,7 +203,7 @@
    {
     "id": "p-karan-shah",
     "name": "Karan Shah",
-    "role": "Healthcare, Specialty Chemicals & IT",
+    "role": "Healthcare & Specialty Chemicals",
     "img": "/img/team-4eac93536f.webp",
     "facts": [
      [
@@ -327,17 +327,12 @@
    "name": "Nxtra",
    "tag": "Best-in-Class Execution at Scale in India’s AI Infrastructure Build-Out.",
    "url": "https://www.nxtra.in",
-   "pts3": [
-    "Bharti Airtel's data centre platform and India's largest data centre network, with 14 core and 120+ edge facilities.",
-    "Scaling from ~300 MW towards 1 GW of AI-ready capacity across AI, cloud adoption and data localisation.",
-    "Anchorage invested behind proven execution and scale, alongside Alpha Wave Global and Carlyle in the ~US$1 billion round."
-   ],
    "pts": [
     "Bharti Airtel’s data centre platform and India’s largest data centre network, with 14 core and 120+ edge facilities nationwide, combining scaled infrastructure with Airtel’s broader ecosystem advantage.",
     "Scaling from ~300 MW towards 1 GW of AI-ready capacity, led by a high-calibre management team and positioned at the convergence of AI, cloud adoption and data localisation.",
     "Anchorage invested behind Nxtra’s proven execution and scale, with Alpha Wave Global and Carlyle among the other co-investors in Nxtra’s ~US$1 billion fundraise."
    ],
-   "q": "“Anchorage brings a valuable global perspective on AI, compute and digital infrastructure, coupled with a strong understanding of how these themes are evolving in India. Their perspective adds real value as we build for the next generation of digital infrastructure.”",
+   "q": "Anchorage brings a valuable global perspective on AI, compute and digital infrastructure, coupled with a strong understanding of how these themes are evolving in India. Their perspective adds real value as we build for the next generation of digital infrastructure.",
    "who": "Gopal Vittal",
    "role": "Executive Vice Chairman, Bharti Airtel"
   },
@@ -347,17 +342,12 @@
    "name": "Meril Life Sciences",
    "tag": "Ahead of India’s MedTech Inflection.",
    "url": "https://www.merillife.com",
-   "pts3": [
-    "India's largest medical devices company, with integrated R&D and manufacturing across cardiovascular, orthopaedics and surgical robotics.",
-    "Anchorage identified MedTech early, backing Meril and its founders at the start of its global growth journey.",
-    "Among Meril's earliest institutional backers, investing in 2022 at a ~US$1.8 billion valuation."
-   ],
    "pts": [
     "India’s largest medical devices company and a global innovator, with integrated R&D and manufacturing across cardiovascular, orthopaedics, surgical robotics and other advanced medical device categories, including pioneering indigenous technologies such as coronary stents and the Myval TAVR platform.",
     "Anchorage identified MedTech early as a secular growth opportunity, underpinned by strong healthcare tailwinds and an inflection akin to India’s IT sector, backing Meril and its founders at an early stage of their global growth journey.",
     "Among Meril’s earliest institutional backers, Anchorage invested alongside Warburg Pincus in 2022 at a ~US$1.8 billion valuation. In 2025 ADIA invested at a ~US$6.6 billion valuation."
    ],
-   "q": "“Our relationship with Rohit and Anchorage spans over 25 years, grounded in trust and a shared long-term vision. They understood what we were building long before its scale was evident, and have remained a trusted partner through our journey.”",
+   "q": "Our relationship with Rohit and Anchorage spans over 25 years, grounded in trust and a shared long-term vision. They understood what we were building long before its scale was evident, and have remained a trusted partner through our journey.",
    "who": "Shahid Bilakhia",
    "role": "Co-founder & Chairman, Meril Life Sciences Group"
   },
@@ -367,18 +357,13 @@
    "name": "Neysa Networks",
    "tag": "Early Access to India’s AI Compute Layer.",
    "url": "https://neysa.ai",
-   "pts3": [
-    "Founded by Sharad Sanghi, a pioneer of India's commercial data centre industry.",
-    "Sovereign, production-grade AI infrastructure for mission-critical enterprise and government workloads.",
-    "One of India's select AI cloud platforms working with both NVIDIA and AMD."
-   ],
    "pts": [
     "Founded by Sharad Sanghi, a pioneer of India’s commercial data centre industry, bringing deep pedigree in building and scaling digital infrastructure.",
     "Positioned at the heart of India’s AI build-out, providing sovereign, production-grade AI infrastructure for mission-critical enterprise and government workloads.",
     "One of India’s select AI cloud platforms working with both NVIDIA and AMD, with the capability to deploy and operate GPU infrastructure at scale.",
     "Anchorage identified and backed Neysa at a formative stage, with the platform subsequently attracting a ~US$1.2 billion Blackstone-led capital commitment to accelerate AI infrastructure deployment across India."
    ],
-   "q": "“Anchorage saw the scale of the opportunity in Neysa before we fully appreciated it. Their conviction in what the business could become was striking at the time, and the journey since has demonstrated the foresight behind that view.”",
+   "q": "Anchorage saw the scale of the opportunity in Neysa before we fully appreciated it. Their conviction in what the business could become was striking at the time, and the journey since has demonstrated the foresight behind that view.",
    "who": "Sharad Sanghi",
    "role": "Founder & CEO, Neysa Networks"
   },
@@ -388,17 +373,12 @@
    "name": "Precision Wires",
    "tag": "Growth Capital Behind an Electrification Leader.",
    "url": "https://precisionwires.in",
-   "pts3": [
-    "One of Asia's leading winding wire manufacturers, with over three decades across Power, EVs, Renewables and Data Centres.",
-    "Anchorage invested at a key inflection point in India's electrification cycle.",
-    "Growth capital funded a record capex programme, accelerating capacity expansion and earnings growth."
-   ],
    "pts": [
     "One of Asia’s leading winding wire manufacturers, with a track record spanning over three decades and exposure across Power, EVs, Renewables and Data Centres.",
     "Anchorage invested at a key inflection point in India’s electrification cycle, drawing on a deep familiarity with the sector.",
     "Growth capital deployed across multiple rounds enabled a record capex programme, accelerating capacity expansion and driving a step-change in earnings growth."
    ],
-   "q": "“Our relationship with the Kotharis goes back three decades, well beyond investment. They have backed us consistently through successive phases of growth and capital raising, the kind of steadfast partnership that is rare to find.”",
+   "q": "Our relationship with the Kotharis goes back three decades, well beyond investment. They have backed us consistently through successive phases of growth and capital raising, the kind of steadfast partnership that is rare to find.",
    "who": "Milan Mehta",
    "role": "Chairman & Managing Director, Precision Wires"
   },
@@ -408,17 +388,12 @@
    "name": "ACE Insurance Brokers",
    "tag": "Backing a High-Return Specialist in Complex Risk.",
    "url": "https://aceinsurance.com",
-   "pts3": [
-    "Leading Indian insurance broking and risk advisory platform with over two decades of experience.",
-    "A capital-light, exceptionally high-margin model built on specialist expertise and complex risk structuring.",
-    "Anchorage invested for its specialist franchise and exceptional economics; Blackstone holds a majority stake."
-   ],
    "pts": [
     "Leading Indian insurance broking and risk advisory platform, with over two decades of experience and an integrated offering spanning corporate insurance, risk management and reinsurance.",
     "A capital-light, exceptionally high-margin model with superior ROCE, where specialist domain knowledge, complex risk structuring and deep client relationships create a durable competitive moat.",
     "Anchorage invested in ACE for its specialist franchise and exceptional economics. Blackstone holds a majority stake in the business."
    ],
-   "q": "“Anchorage was our first investment partner and understood the quality and potential of our business early. They have been a thoughtful partner through our evolution, supporting us as we scaled and entered our next phase of institutional growth.”",
+   "q": "Anchorage was our first investment partner and understood the quality and potential of our business early. They have been a thoughtful partner through our evolution, supporting us as we scaled and entered our next phase of institutional growth.",
    "who": "Raj Ajmera",
    "role": "Founder, ACE Insurance Brokers"
   },
@@ -428,17 +403,12 @@
    "name": "Enviro Infra Engineers",
    "tag": "From Nascent Player to Water Infrastructure Leader.",
    "url": "https://www.eiel.in",
-   "pts3": [
-    "Integrated water infrastructure across sewage, industrial wastewater and recycling, expanding into desalination and ZLD.",
-    "Positioned in a ₹20 trillion (~US$240 billion) decade-long opportunity as water becomes critical.",
-    "Anchorage backed Enviro at a nascent stage, well ahead of broader market recognition."
-   ],
    "pts": [
     "Integrated water infrastructure player spanning sewage, industrial wastewater and recycling, with in-house capabilities across process design and execution; expanding into Desalination and Zero Liquid Discharge (ZLD) for its next phase of growth.",
     "Positioned in a ₹20 trillion (~US$240 billion) decade-long opportunity, as water becomes an increasingly critical resource across industries, driven by infrastructure investment, industrial demand and tightening wastewater norms.",
     "Anchorage identified the water infrastructure opportunity early, backing Enviro at a nascent stage, well ahead of broader market recognition, and supporting its evolution from a small player into a scaled water infrastructure platform."
    ],
-   "q": "“Anchorage recognised the potential of water resource management well before most, and backed us at a very early stage in our journey. The conviction with which they put in capital gave us the confidence to pursue a much larger opportunity and accelerate our growth.”",
+   "q": "Anchorage recognised the potential of water resource management well before most, and backed us at a very early stage in our journey. The conviction with which they put in capital gave us the confidence to pursue a much larger opportunity and accelerate our growth.",
    "who": "Manish Jain",
    "role": "Managing Director, Enviro Infra Engineers"
   },
@@ -448,18 +418,13 @@
    "name": "Thriveni Earthmovers",
    "tag": "Backing a Formidable Operator in Critical Minerals.",
    "url": "https://thriveni.com",
-   "pts3": [
-    "Built by B. Prabhakaran, now part of the broader Lloyds Metals & Energy ecosystem.",
-    "Positioned across resources critical to industrial growth and the AI economy, with projects in India and DR Congo.",
-    "Proven turnaround specialist, bringing stalled mines to life and rapidly scaling production."
-   ],
    "pts": [
     "Built by Mr. B. Prabhakaran, one of the most dynamic and respected founders in the resources sector, Thriveni has grown into an integrated resources platform and is today part of the broader Lloyds Metals & Energy ecosystem.",
     "Positioned across resources critical to industrial growth and the AI economy, spanning iron ore, coal, copper and cobalt, with projects across India and DR Congo and an upcoming project in Papua New Guinea.",
     "Proven turnaround specialist, with a track record of bringing stalled mines to life and rapidly scaling production: a distinctive execution edge in a complex sector.",
     "Anchorage backed Thriveni for its exceptional execution, strong return ratios and significant growth optionality, with several opportunities identified at investment already translating into live projects."
    ],
-   "q": "“Anchorage brings a depth of understanding of the resources sector that is unusual for an investor. Their ability to understand the operating realities of our business and engage with us from that perspective makes them a highly valued partner.”",
+   "q": "Anchorage brings a depth of understanding of the resources sector that is unusual for an investor. Their ability to understand the operating realities of our business and engage with us from that perspective makes them a highly valued partner.",
    "who": "B. Prabhakaran",
    "role": "Founder & Managing Director, Thriveni Earthmovers"
   },
@@ -469,17 +434,12 @@
    "name": "Qi Cap",
    "tag": "Ahead of the Curve on AI-Native Asset Management.",
    "url": "https://qicap.ai",
-   "pts3": [
-    "Founded by Amit Rathi, with multi-decade experience across capital and commodity markets.",
-    "Global deeptech platform built on proprietary AI/ML alpha engines, processing ~500 million orders daily.",
-    "Anchorage backed Qi Cap early, before AI-native investing entered the mainstream."
-   ],
    "pts": [
     "Founded by Amit Rathi, bringing multi-decade experience across capital and commodity markets and deep expertise in systematic investing.",
     "Global deeptech platform built around proprietary AI/ML alpha engines and self-learning strategies, combining advanced data science with institutional-scale, low-latency execution; processing ~500 million orders daily with a 100+ member team of IIT-trained engineers and data scientists.",
     "Anchorage backed Qi Cap early, recognising the potential for AI-native investing to disrupt traditional asset management well before the theme entered the mainstream."
    ],
-   "q": "“Anchorage is an exceptionally sharp investment team with a deep understanding of capital markets and technology. They understood the potential of our AI-led approach early, well before the opportunity became widely recognised.”",
+   "q": "Anchorage is an exceptionally sharp investment team with a deep understanding of capital markets and technology. They understood the potential of our AI-led approach early, well before the opportunity became widely recognised.",
    "who": "Amit Rathi",
    "role": "Co-founder & CEO, Qi Cap"
   }
@@ -570,6 +530,10 @@
   {
    "q": "Who is the founder of Anchorage?",
    "a": "Rohit Kothari is the Founder and Executive Chairman of Anchorage Alpha. A Chartered Accountant with an MBA from Babson College, he built and scaled Aroni Chemicals and Gwalior Chemicals, and founded Antique Stock Broking Limited in 2008. Anchorage began as the Kothari family office, which has more than 25 years of value-driven investing behind it."
+  },
+  {
+   "q": "Can anyone invest in Anchorage Capital?",
+   "a": "No. Units of Anchorage Capital are offered solely by private placement to eligible investors pursuant to a confidential placement memorandum. This website is for information only and is not an offer or solicitation. Eligible investors can write to <a href=\"mailto:investor@anchoragealpha.com\">investor@anchoragealpha.com</a>."
   },
   {
    "q": "Where is Anchorage Alpha located?",

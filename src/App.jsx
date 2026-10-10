@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, memo 
 import Lenis from 'lenis'
 import C0 from './content.json'
 import { Split, DepthMeter } from './v2.jsx'
+import { HeroVoices, useSpot, Glow } from './v3.jsx'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const U = p => BASE + p
@@ -448,61 +449,50 @@ const Hero = memo(() => (
       <img className="hero-logo a11y-keep" src={U('/img/logo-white.png')} alt="Anchorage Alpha" />
       <p className="hero-line">Anchored in Insight.<br/>Steered by Purpose.</p>
     </div>
+    <HeroVoices items={C.feat} />
     <button className="cue" onClick={() => goTo('about')} aria-label="Scroll to About us"><i /></button>
   </section>
 ))
 
 const About = memo(() => {
-  const a = C.about, k = useSeen()
+  const a = C.about, k = useSeen(), sp = useSpot()
   return (
-    <section id="about" className="sec bgsec about">
-      <div className="bg" aria-hidden="true"><div className="bgimg"><div className="side-meta"><span>India</span><span>Growth capital</span><span>Since 2022</span></div></div></div>
+    <section id="about" ref={sp} className="sec bgsec about spot">
+      <div className="bg" aria-hidden="true"><Glow /></div>
+      <i className="ab-blur b1" aria-hidden="true" /><i className="ab-blur b2" aria-hidden="true" /><i className="ab-blur b3" aria-hidden="true" />
       <div className="wrap">
         <Label>About us</Label>
         <Split text={a.h} className="h2" seenRef={k} />
-        {a.p.map((p, i) => <Rv key={i} as="p" d={500 + 160 * i} className="lede blurin" {...html(p)} />)}
+        <div className="ab-copy">{a.p.map((p, i) => <Rv key={i} as="p" d={500 + 160 * i} className="lede blurin" {...html(p)} />)}</div>
       </div>
     </section>
   )
 })
 
 const Schemes = memo(() => {
-  const a = C.about
-  const aum = a.schemes[3]
+  const a = C.about, aum = a.schemes[3], sp = useSpot()
   const [usd, inr] = aum.n.replace('*', '').split('\u20B9')
-  const [hot, setHot] = useState(-1)
-  const orb = useRef(null)
-  const tilt = e => {
-    const r = orb.current.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height
-    const o = orb.current.style
-    o.setProperty('--mx', x * 100 + '%'); o.setProperty('--my', y * 100 + '%')
-    o.setProperty('--ry', (x - .5) * 14 + 'deg'); o.setProperty('--rx', (.5 - y) * 14 + 'deg')
-  }
-  const rest = () => { const o = orb.current.style; o.setProperty('--rx', '0deg'); o.setProperty('--ry', '0deg'); o.setProperty('--mx', '35%'); o.setProperty('--my', '25%') }
   return (
-    <section id="schemes" className="sec bgsec schemes-sec">
-      <div className="bg" aria-hidden="true" />
+    <section id="schemes" ref={sp} className="sec bgsec schemes-sec spot">
+      <Glow />
       <div className="wrap">
         <SecLabel>Our schemes</SecLabel>
-        <div className={`sch-wrap ${hot >= 0 ? 'hot' : ''}`}>
-          <svg className="sch-links" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
-            <path className={hot === 0 ? 'on' : ''} d="M120 60 C 300 -20, 620 -20, 835 90" /><path className={hot === 1 ? 'on' : ''} d="M385 60 C 520 20, 700 40, 830 130" /><path className={hot === 2 ? 'on' : ''} d="M650 60 C 720 90, 790 150, 825 175" />
-          </svg>
-          {a.schemes.slice(0, 3).map((s, i) => (
-            <Rv key={i} d={i * 120} className={`sch-card ${hot === i ? 'is-hot' : ''}`} onMouseEnter={() => setHot(i)} onMouseLeave={() => setHot(-1)} onFocus={() => setHot(i)} onBlur={() => setHot(-1)} tabIndex={0}>
+        <div className="pl-scene">
+          <div className="pl-cards">{a.schemes.slice(0, 3).map((s, i) => (
+            <Rv key={i} d={i * 120} className="pl-card" tabIndex={0}>
               <span className="k">{s.l}</span>
               <span className="big">{s.n}</span>
               <span className="sdiv" aria-hidden="true" />
               <span className="sfoot"><span>Inception</span><b>{s.d.replace(/^Inception\s*/, '')}</b></span>
-              <i className="dot" aria-hidden="true" />
-            </Rv>
-          ))}
-          <Rv d={420} className="orb-w"><div ref={orb} className="orb" onMouseMove={tilt} onMouseLeave={rest}>
-            <span className="k">{aum.l}</span>
-            <span className="val">{usd.trim()}<sup>*</sup></span>
-            <span className="inr">{'\u20B9'}{inr}</span>
-            <span className="k">{aum.d}</span>
-          </div></Rv>
+            </Rv>))}
+          </div>
+          <Rv d={360} className="plinth">
+            <span className="pl-k"><span>{aum.l}</span><em>{aum.d}</em></span>
+            <i aria-hidden="true" />
+            <span className="pl-val">{usd.trim()}<sup>*</sup></span>
+            <i aria-hidden="true" />
+            <span className="pl-inr">{'\u20B9'}{inr}</span>
+          </Rv>
         </div>
         <p className="note" {...html(a.note)} />
       </div>
@@ -512,7 +502,6 @@ const Schemes = memo(() => {
 
 const Legacy = memo(() => {
   const l = C.legacy, k = useSeen()
-  const [more, setMore] = useState(false)
   return (
     <section id="legacy" className="sec bgsec legacy-sec">
       <div className="bg" aria-hidden="true" />
@@ -522,8 +511,6 @@ const Legacy = memo(() => {
           <Split text={l.h} className="h2" seenRef={k} />
           <Rv as="p" d={500} className="sub-h">{l.sub}</Rv>
           {l.p.slice(0, 2).map((p, i) => <Rv key={i} as="p" d={600 + i * 120} className="lede blurin">{p}</Rv>)}
-          <div className={`more ${more ? 'open' : ''}`}><div>{l.p.slice(2).map((p, i) => <p key={i} className="lede">{p}</p>)}</div></div>
-          <button type="button" className="rm" aria-expanded={more} onClick={() => setMore(!more)}><span>{more ? 'Read less' : 'Read more'}</span><i /></button>
         </div>
         <div className="stats">{l.stats.map((s, i) => <div key={i} className="stat"><Count html={s.b} /><span>{s.s}</span>{s.e && <em>{s.e}</em>}</div>)}</div>
         <p className="note">* Assets under management of the sponsor group and the Kothari family office, including listed and unlisted holdings.</p>
@@ -533,18 +520,19 @@ const Legacy = memo(() => {
 })
 
 const Founder = memo(() => {
-  const f = C.founder
+  const f = C.founder, sp = useSpot()
   return (
-    <section id="founder" className="sec bgsec founder-sec">
-      <div className="bg" aria-hidden="true" />
-      <div className="wrap fd">
-        <div className="panel-g">
+    <section id="founder" ref={sp} className="sec fx spot">
+      <div className="fx-bg" aria-hidden="true" /><Glow />
+      <div className="wrap fx-in">
+        <div className="fx-fig"><Unveil src={f.img} alt={f.name} className="fx-photo" /></div>
+        <div className="fx-text">
           <Label>{f.role}</Label>
-          <Rv as="h3" className="h2">{f.name}</Rv>
-          {f.p.map((p, i) => <Rv key={i} as="p" d={120 + i * 120} className="lede blurin">{p}</Rv>)}
-          <div className="chips">{f.chips.map(c => <span key={c}>{c}</span>)}</div>
+          <Rv as="h3" className="fx-name">{f.name}</Rv>
+          <span className="fx-rule" aria-hidden="true" />
+          {f.p.map((p, i) => <Rv key={i} as="p" d={140 + i * 140} className={`fx-p ${i === 0 ? 'lead' : ''}`}>{p}</Rv>)}
+          <Rv d={600} className="fx-cred">{f.chips.map(c => <span key={c}>{c}</span>)}</Rv>
         </div>
-        <Unveil src={f.img} alt={f.name} className="arch" />
       </div>
     </section>
   )
@@ -571,7 +559,7 @@ function Team() {
         <Label>Team</Label>
         <div className="head2">
           <Rv as="h2" className="h2">One shared network.<sup>*</sup></Rv>
-          <Rv as="p" d={120} className="lede">Led by Rohit Kothari, Founder &amp; Executive Chairman, our specialists cover every major sector. Select a name to read more.</Rv>
+          <Rv as="p" d={120} className="lede">Led by Rohit Kothari, Founder &amp; Executive Chairman, our specialists cover every major sector.</Rv>
         </div>
         <div className="grid">{C.team.members.map((m, i) => (
           <Rv key={m.id} d={(i % 5) * 70}><button className="card" onClick={() => setP(m)}>
@@ -593,13 +581,15 @@ function Team() {
 }
 
 const Approach = memo(() => (
-  <section id="approach" className="sec dark approach-sec">
-    <div className="approach-bg" aria-hidden="true"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /></div>
-    <div className="approach-scrim" aria-hidden="true" />
-    <div className="wrap split">
-      <div className="stick"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
-      <ul className="princ">{C.approach.map((a, i) => (
-        <Rv as="li" key={i} d={i * 110}><h3>{a.h}</h3><p>{a.p}</p></Rv>))}</ul>
+  <section id="approach" className="dark approach-sec" data-step="0">
+    <div className="ap-pin">
+      <div className="approach-bg" aria-hidden="true"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /></div>
+      <div className="approach-scrim" aria-hidden="true" />
+      <div className="wrap ap-in">
+        <div className="ap-head"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
+        <ol className="ap-list">{C.approach.map((a, i) => (
+          <Rv as="li" key={i} d={i * 90} className="ap-item"><div><h3>{a.h}</h3><p>{a.p}</p></div></Rv>))}</ol>
+      </div>
     </div>
   </section>
 ))
@@ -617,12 +607,12 @@ const coIcon = t => {
 }
 
 function coData(f) {
-  const pts = f.pts3 || f.pts || []
+  const pts = f.pts || []
   return {
     logo: f.logo,
     name: f.name,
     tagline: f.tag || '',
-    points: [pts[0] || '', pts[1] || '', pts[2] || ''],
+    points: pts,
     quote: f.q || '',
     person: f.who || '',
     designation: f.role || '',
@@ -779,7 +769,7 @@ function Investors() {
             )
           })}</div>}
           {t === 1 && <>
-            <p className="note first">Policies of Anchorage Capital and its schemes, available to download below.</p>
+            <p className="note first">Policies of Anchorage Capital and its schemes, available to download as PDF.</p>
             {C.pol.map(p => (
               <div key={p.t} className="pol">
                 <div><h3>{p.t}</h3><p>{p.d}</p></div>
@@ -787,7 +777,7 @@ function Investors() {
                   <a className="dl" href={p.href} download aria-label={`Download ${p.t}`}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M12 4v11"/><path d="M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19h14"/>
-                    </svg>Download PDF
+                    </svg>Download
                   </a>
                   <small>{p.meta}</small>
                 </div>
@@ -821,53 +811,41 @@ function Contact() {
   }, [doc])
 
   return (
-    <section id="contact" className="sec dark">
-      <div className="wrap">
-        <div className="ct-lead">
-          <div className="ct-intro">
-            <Label>Contact</Label>
-            <Rv as="h2" className="h1">Get in touch.</Rv>
+    <section id="contact" className="sec ct2">
+      <div className="ct2-stage">
+      <div className="ct2-bg" aria-hidden="true" />
+      <div className="wrap ct2-wrap">
+        <SecLabel>Contact</SecLabel>
+        <div className="ct2-grid">
+          <div className="ct2-lead">
+            <Rv as="h2" className="h1">Speak with us.</Rv>
             <Rv as="p" d={120} className="lede">For investor enquiries, write to the team directly.</Rv>
+            <Rv d={200}><a className="ct-mail" href="mailto:investor@anchoragealpha.com"><span>investor@anchoragealpha.com</span><svg width="16" height="16" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg></a></Rv>
           </div>
-          <Rv d={180} className="ct-direct">
-            <h3 className="ct-kicker">Direct</h3>
-            <a className="ct-mail" href="mailto:investor@anchoragealpha.com">
-              <span>investor@anchoragealpha.com</span>
-              <svg className="ct-arrow" width="18" height="18" viewBox="0 0 14 14" aria-hidden="true">
-                <path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-          </Rv>
+          <div className="ct2-info">
+            <Rv className="ct2-row">
+              <div><h3 className="c-h">Office</h3><address>209/210, 2nd Floor, Arcadia Building<br />NCPA Marg, Nariman Point<br />Mumbai, Maharashtra 400021<br /><a href="tel:+912240198600">022-40198600</a></address></div>
+              <div><h3 className="c-h">Enquiries</h3><p><b>Investors:</b> <a href="mailto:investor@anchoragealpha.com">investor@anchoragealpha.com</a></p><p><b>General:</b> <a href="mailto:contact@anchoragealpha.com">contact@anchoragealpha.com</a></p></div>
+            </Rv>
+            <Rv d={100} className="ct2-reg">
+              <h3 className="c-h">Fund &amp; regulatory</h3>
+              <div className="reg-cols">
+                <div><p><b>Fund:</b> Anchorage Capital</p><p><b>Category:</b> Category II AIF</p><p><b>SEBI registration:</b> IN/AIF2/21-22/1003</p></div>
+                <div><p><b>Sponsor:</b> Rohit Kothari</p><p><b>Investment manager:</b> Anchorage Alpha Investments Advisor Private Limited</p><p><b>Trustee:</b> Orbis Trusteeship Services Private Limited</p><p><b>Compliance officer:</b> Bhaven Jain</p></div>
+              </div>
+            </Rv>
+            <Rv d={180} className="ct2-odr" id="grievance">
+              <h3 className="c-h">Investor grievance redressal</h3>
+              <div className="reg-cols">
+                <p>SEBI SCORES link:<br /><a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener">https://scores.sebi.gov.in/</a></p>
+                <p>Online Dispute Resolution Portal link:<br /><a href="https://smartodr.in/" target="_blank" rel="noopener">https://smartodr.in/</a></p>
+              </div>
+            </Rv>
+          </div>
         </div>
-        <div className="ct-facts">
-          <Rv d={0} className="ct-fact">
-            <h3><span className="ct-idx" aria-hidden="true">01</span>Office</h3>
-            <address>209/210, 2nd Floor, Arcadia Building<br />NCPA Marg, Nariman Point<br />Mumbai, Maharashtra 400021</address>
-            <p><a href="tel:+912240198600">022-40198600</a></p>
-          </Rv>
-          <Rv d={90} className="ct-fact">
-            <h3><span className="ct-idx" aria-hidden="true">02</span>Enquiries</h3>
-            <p><b>Investors</b><a href="mailto:investor@anchoragealpha.com">investor@anchoragealpha.com</a></p>
-            <p><b>General</b><a href="mailto:contact@anchoragealpha.com">contact@anchoragealpha.com</a></p>
-          </Rv>
-          <Rv d={180} className="ct-fact" id="grievance">
-            <h3><span className="ct-idx" aria-hidden="true">03</span>Grievance redressal</h3>
-            <p><b>SEBI SCORES</b><a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener">scores.sebi.gov.in</a></p>
-            <p><b>Dispute portal</b><a href="https://smartodr.in/" target="_blank" rel="noopener">smartodr.in</a></p>
-          </Rv>
-        </div>
-        <Rv d={0} className="ct-reg">
-          <h3 className="ct-kicker">Fund &amp; regulatory</h3>
-          <dl>
-            <div><dt>Fund</dt><dd>Anchorage Capital</dd></div>
-            <div><dt>Category</dt><dd>Category II AIF</dd></div>
-            <div><dt>SEBI registration</dt><dd>IN/AIF2/21-22/1003</dd></div>
-            <div><dt>Sponsor</dt><dd>Rohit Kothari</dd></div>
-            <div><dt>Investment manager</dt><dd>Anchorage Alpha Investments Advisor Private Limited</dd></div>
-            <div><dt>Trustee</dt><dd>Orbis Trusteeship Services Private Limited</dd></div>
-            <div><dt>Compliance officer</dt><dd>Bhaven Jain</dd></div>
-          </dl>
-        </Rv>
+      </div>
+      </div>
+      <div className="wrap">
         <footer onClick={e => { if (e.target.closest('.nw')) { e.preventDefault(); setDoc('legal') } }}>
           <div className="foot-top">
             <p className="foot-copy">{C.footer[2]}</p>

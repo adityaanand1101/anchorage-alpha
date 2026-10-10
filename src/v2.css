@@ -172,3 +172,45 @@
 .about .bgimg{transform:translateY(calc(-1 * var(--ov)))}
 /* the warm wash must only tint the stone itself, never the video showing through the transparent top */
 .about .bgimg::after{-webkit-mask:url(/img/bg-about.webp) center/100% 100% no-repeat;mask:url(/img/bg-about.webp) center/100% 100% no-repeat}
+
+/* ---- round 7: alignment polish ---- */
+/* about: copy sits higher on the wall, side meta higher in the window */
+.about{padding-top:clamp(24px,3vw,48px)}
+.side-meta{top:37%}
+@media(max-width:860px){.about{padding-top:clamp(24px,8vw,48px)}}
+/* how we invest: long eased fall from the light surface into deep water, no grey band */
+.team-sec::after{height:clamp(300px,34vw,520px);background:linear-gradient(180deg,rgba(250,247,242,0) 0,rgba(214,224,230,.10) 12%,rgba(160,181,195,.28) 28%,rgba(100,128,150,.48) 44%,rgba(54,84,108,.70) 60%,rgba(25,52,76,.88) 76%,rgba(13,34,54,.97) 90%,var(--deep) 100%)}
+.team-sec{padding-bottom:clamp(300px,34vw,520px)}
+.approach-sec::before{height:clamp(240px,26vw,400px);background:linear-gradient(180deg,var(--deep) 0,rgba(11,31,51,.96) 10%,rgba(11,31,51,.86) 22%,rgba(11,31,51,.7) 36%,rgba(11,31,51,.52) 50%,rgba(11,31,51,.34) 64%,rgba(11,31,51,.18) 78%,rgba(11,31,51,.06) 90%,rgba(11,31,51,0) 100%)}
+
+/* ---- round 8 ---- */
+/* founder (desktop): v8 background back - one image filling the whole section, soft dissolve at top and bottom.
+   Image is width-fit and top-anchored (1672:941), so the portrait frame can be placed against the arch opening in vw. */
+.founder-sec{min-height:56.3vw;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(48px,5vw,84px)}
+.founder-sec>.wrap{width:100%}
+.founder-sec .fd{position:static;display:block}
+.founder-sec>.bg{background-image:url(/img/bg-founder.webp);background-size:100% auto;background-position:center top;background-color:#b2a192}
+.founder-sec .arch{position:absolute;z-index:1;left:77%;top:calc(.222*56.3vw);width:28.4%;height:calc(.553*56.3vw);aspect-ratio:auto;margin:0;transform:translateX(-50%);justify-self:auto;border:1px solid rgba(255,255,255,.7);border-radius:999px 999px 3px 3px;box-shadow:0 14px 34px -20px rgba(11,31,51,.4)}
+.founder-sec .arch img{object-position:center 16%}
+
+/* ---- mobile ---- */
+@media(max-width:860px){
+  /* hero: no video extension; the wall artwork rises into the first screen so the sun shows in the header */
+  :root{--ov:0px;--sun-lift:76vw}
+  .hero-in{padding-bottom:66vw}
+  .about{min-height:0;padding-top:0;padding-bottom:calc(16vh + 8vw);margin-top:0}
+  .about .bgimg{right:-7vw;transform:translateY(calc(-1*var(--sun-lift)))}
+  /* about us: an arched glass pane standing in the arch opening, round top */
+  .about .wrap{position:relative;width:72vw;max-width:none;margin:0 0 0 calc(14.2vw - var(--gut));padding:19vw 6.5vw 9vw;text-align:center;background:linear-gradient(180deg,rgba(250,247,242,.55),rgba(250,247,242,.82) 38%);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.75);border-radius:999px 999px 14px 14px;box-shadow:0 30px 60px -40px rgba(11,31,51,.45)}
+  .about .wrap .label{justify-content:center;margin-bottom:1.1rem}
+  .about .wrap .h2{max-width:none;margin-inline:auto;font-size:clamp(1.7rem,8vw,2.4rem)}
+  .about .wrap .lede{margin-top:1.1rem;font-size:.95rem;line-height:1.7;text-align:left}
+  /* founder: v8 dissolve, arch frame follows the (230%-wide) artwork */
+  .founder-sec{display:block;min-height:0;padding-block:0;padding-top:calc(132vw + 12px);padding-bottom:clamp(60px,12vw,100px)}
+  .founder-sec>.bg{background-size:230% auto;background-position:right top;background-color:transparent;-webkit-mask-image:linear-gradient(180deg,transparent,#000 14vw,#000 calc(129.45vw - 26vw),transparent 129.45vw);mask-image:linear-gradient(180deg,transparent,#000 14vw,#000 calc(129.45vw - 26vw),transparent 129.45vw)}
+  .founder-sec .arch{left:47.1vw;top:calc(.222*129.45vw);width:65.3vw;height:calc(.553*129.45vw)}
+  /* team -> how we invest: longer, bluer descent (no grey/dark band) */
+  .team-sec{padding-bottom:min(560px,150vw)}
+  .team-sec::after{height:min(560px,150vw);background:linear-gradient(180deg,rgba(250,247,242,0) 0,rgba(236,240,242,.55) 10%,rgba(205,222,233,.85) 26%,rgba(160,191,211,.96) 44%,rgba(112,152,178,1) 64%,rgba(80,120,148,1) 82%,rgb(58,98,127) 100%)}
+  .approach-sec::before{z-index:2;height:260px;background:linear-gradient(180deg,rgb(58,98,127) 0,rgba(58,98,127,.82) 18%,rgba(58,98,127,.55) 40%,rgba(58,98,127,.28) 64%,rgba(58,98,127,.09) 84%,rgba(58,98,127,0) 100%)}
+}

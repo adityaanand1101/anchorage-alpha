@@ -116,6 +116,8 @@ FEATURES.forEach(function (f) { BY_ID[f.id] = f; });
 var EMAIL = 'investor@anchoragealpha.com';
 var root = document.createElement('div');
 root.id = 'a11y';
+/* the page's smooth-scroll library locks the page while this panel is open; this tells it to leave wheel/touch scrolling inside the panel alone */
+root.setAttribute('data-lenis-prevent', '');
 
 var cards = '';
 GROUPS.forEach(function (g) {

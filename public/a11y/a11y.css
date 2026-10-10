@@ -64,7 +64,7 @@
 #a11y .a11y-hbtn:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 
 /* body + cards */
-#a11y .a11y-body{overflow:auto;overscroll-behavior:contain;padding:12px;display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch}
+#a11y .a11y-body{min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;touch-action:pan-y;padding:12px;display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch}
 #a11y .a11y-card{background:var(--card);border:1px solid rgba(11,31,51,.08);border-radius:12px;padding:14px}
 #a11y .a11y-card h3{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--d);margin:0 0 10px}
 #a11y .a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}

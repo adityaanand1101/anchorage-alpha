@@ -191,11 +191,40 @@ function LoopVideo({ src = '/video/hero.mp4', poster = '/video/poster.jpg' }) {
     const F = 1.4
     let cur = a, nxt = b, busy = false, seen = true, timer = 0
 
+    /* Soft audio: every start fades in, every stop fades out (the clip's own sound never cuts abruptly) */
+    const fades = new Map()
+    const ease = k => k * k * (3 - 2 * k)
+    const fadeTo = (v, to, ms, done) => {
+      cancelAnimationFrame(fades.get(v))
+      let from = 1
+      try { from = v.volume } catch (e) {}
+      const t0 = performance.now()
+      const step = now => {
+        const k = Math.min(1, (now - t0) / ms)
+        try { v.volume = Math.max(0, Math.min(1, from + (to - from) * ease(k))) } catch (e) {}
+        if (k < 1) fades.set(v, requestAnimationFrame(step))
+        else if (done) done()
+      }
+      fades.set(v, requestAnimationFrame(step))
+    }
+    const setVol = (v, x) => { cancelAnimationFrame(fades.get(v)); try { v.volume = x } catch (e) {} }
+
     const playSafe = v => {
       try {
         const p = v.play()
         if (p && p.catch) p.catch(() => {})
       } catch (e) {}
+    }
+    /* start (or resume) a clip with its sound rising gently from silence */
+    const playSoft = (v, ms = 2600) => {
+      setVol(v, 0)
+      playSafe(v)
+      fadeTo(v, 1, ms)
+    }
+    /* stop a clip by letting its sound sink first, then pausing */
+    const pauseSoft = (v, ms = 700) => {
+      if (v.paused) return
+      fadeTo(v, 0, ms, () => { try { v.pause() } catch (e) {} })
     }
 
     const swapVideos = () => {
@@ -203,8 +232,11 @@ function LoopVideo({ src = '/video/hero.mp4', poster = '/video/poster.jpg' }) {
       busy = true
       const old = cur
 
-      // Start playing next video immediately
+      // Start playing next video immediately, its sound rising as the old one sinks (equal-length crossfade)
+      setVol(nxt, 0)
       playSafe(nxt)
+      fadeTo(nxt, 1, F * 1000)
+      fadeTo(old, 0, F * 1000)
       nxt.style.zIndex = '2'
       old.style.zIndex = '1'
       nxt.classList.add('on')
@@ -242,7 +274,7 @@ function LoopVideo({ src = '/video/hero.mp4', poster = '/video/poster.jpg' }) {
     a.addEventListener('ended', onEnded, { passive: true })
     b.addEventListener('ended', onEnded, { passive: true })
 
-    playSafe(a)
+    playSoft(a)
 
     // Periodic safety check to ensure seamless loop
     const safetyCheck = setInterval(() => {
@@ -256,12 +288,10 @@ function LoopVideo({ src = '/video/hero.mp4', poster = '/video/poster.jpg' }) {
     const io = new IntersectionObserver(([e]) => {
       seen = e.isIntersecting
       if (seen && !document.hidden && !window.paused) {
-        playSafe(cur)
+        if (cur.paused) playSoft(cur, 1600)
       } else {
-        try {
-          a.pause()
-          b.pause()
-        } catch (e) {}
+        pauseSoft(a)
+        pauseSoft(b)
       }
     }, { threshold: 0.05 })
     io.observe(container)
@@ -270,7 +300,7 @@ function LoopVideo({ src = '/video/hero.mp4', poster = '/video/poster.jpg' }) {
       if (document.hidden) {
         try { a.pause(); b.pause() } catch (e) {}
       } else if (seen && !window.paused) {
-        playSafe(cur)
+        playSoft(cur, 1600)
       }
     }
     document.addEventListener('visibilitychange', onVis)
@@ -278,6 +308,7 @@ function LoopVideo({ src = '/video/hero.mp4', poster = '/video/poster.jpg' }) {
     return () => {
       clearInterval(safetyCheck)
       clearTimeout(timer)
+      fades.forEach(id => cancelAnimationFrame(id))
       io.disconnect()
       document.removeEventListener('visibilitychange', onVis)
       a.removeEventListener('timeupdate', onTimeUpdate)
@@ -551,7 +582,7 @@ function Team() {
       </div>
       <div className={`drawer tm ${p ? 'open' : ''}`} aria-hidden={!p}>
         <div className="veil" onClick={() => setP(null)} />
-        <aside role="dialog" aria-label={p?.name} ref={panel}>
+        <aside role="dialog" aria-label={p?.name} ref={panel} data-lenis-prevent>
           {p && <><button className="x" onClick={() => setP(null)}>Close</button>
             <img src={p.img} alt={p.name} /><h3 className="h3">{p.name}</h3><p className="role" {...html(p.role)} />
             <dl>{p.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></>}
@@ -669,7 +700,7 @@ function Portfolio() {
       </div>
       <div className={`modal co ${sel >= 0 ? 'open' : ''}`} aria-hidden={sel < 0}>
         <div className="veil" onClick={() => setSel(-1)} />
-        <div className="mcard" role="dialog" aria-label={f ? f.name : 'Company details'} ref={panel}>
+        <div className="mcard" role="dialog" aria-label={f ? f.name : 'Company details'} ref={panel} data-lenis-prevent>
           {f && <>
             <button className="x" onClick={() => setSel(-1)} aria-label="Close">&times;</button>
             <CoModal d={coData(f)} />
@@ -908,7 +939,8 @@ export default function App() {
       lerp: (window.paused || reduce) ? 1 : 0.085,
       wheelMultiplier: 0.95,
       smoothWheel: true,
-      smoothTouch: false
+      smoothTouch: false,
+      prevent: node => !!(node && node.closest && node.closest('#a11y'))
     })
     window.__lenis = lenis
     lenis.scrollTo(0, { immediate: true })

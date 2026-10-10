@@ -29,6 +29,7 @@ export function DepthMeter() {
       const p = pinned ? Math.min(0.999, Math.max(0, (-r.top) / Math.max(1, r.height - vh))) : 0
       const s = Math.min(5, Math.floor(p * 6))
       el.dataset.step = s
+      el.style.setProperty('--ap', p.toFixed(4))
       setOn(vis); setStep(s)
     }
     const h = () => { if (!raf) raf = requestAnimationFrame(f) }

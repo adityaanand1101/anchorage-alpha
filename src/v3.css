@@ -375,3 +375,60 @@ main .approach-sec .approach-scrim{background:radial-gradient(34% 46% at 28% 50%
 .ab-blur.b1{height:var(--wh)}.ab-blur.b2{height:var(--wh)}.ab-blur.b3{height:var(--wh)}
 .about .wrap{z-index:3}
 main .approach-sec .approach-scrim{background:radial-gradient(34% 46% at 28% 50%,rgba(5,16,32,.38),transparent 100%),radial-gradient(38% 62% at 74% 60%,rgba(5,16,32,.55),transparent 100%)}
+
+/* ===== v18 ===== */
+/* hero -> about: the sea brightens into sunlit shallows, then warms into marble (no grey fog band) */
+.ab-blur.b1{-webkit-backdrop-filter:blur(2px) brightness(1.12) saturate(1.05);backdrop-filter:blur(2px) brightness(1.12) saturate(1.05)}
+.ab-blur.b2{-webkit-backdrop-filter:blur(6px) brightness(1.3) saturate(.95);backdrop-filter:blur(6px) brightness(1.3) saturate(.95)}
+.ab-blur.b3{-webkit-backdrop-filter:blur(14px) brightness(1.55) saturate(.7) sepia(.18);backdrop-filter:blur(14px) brightness(1.55) saturate(.7) sepia(.18)}
+.about::before{background:linear-gradient(180deg,
+ rgba(214,232,244,0) 0,
+ rgba(214,232,244,.04) 10%,
+ rgba(222,234,240,.12) 22%,
+ rgba(232,236,234,.26) 34%,
+ rgba(240,236,226,.46) 47%,
+ rgba(244,236,222,.66) 60%,
+ rgba(244,234,218,.83) 73%,
+ rgba(242,231,214,.94) 86%,
+ rgb(241,230,213) 100%)}
+/* about -> schemes: marble dissolves into ivory instead of ending on a hard line */
+.about{--fade:clamp(140px,14vw,240px)}
+.about>.bg{
+ -webkit-mask:linear-gradient(180deg,transparent 0,transparent 38%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.2) 62%,rgba(0,0,0,.5) 76%,rgba(0,0,0,.82) 90%,#000 100%) 0 0/100% var(--wh) no-repeat,
+  linear-gradient(180deg,#000 0,#000 calc(100% - var(--fade)),rgba(0,0,0,.86) calc(100% - var(--fade)*.8),rgba(0,0,0,.62) calc(100% - var(--fade)*.6),rgba(0,0,0,.36) calc(100% - var(--fade)*.4),rgba(0,0,0,.14) calc(100% - var(--fade)*.2),transparent 100%) 0 calc(var(--wh) - 1px)/100% calc(100% - var(--wh) + 1px) no-repeat;
+ mask:linear-gradient(180deg,transparent 0,transparent 38%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.2) 62%,rgba(0,0,0,.5) 76%,rgba(0,0,0,.82) 90%,#000 100%) 0 0/100% var(--wh) no-repeat,
+  linear-gradient(180deg,#000 0,#000 calc(100% - var(--fade)),rgba(0,0,0,.86) calc(100% - var(--fade)*.8),rgba(0,0,0,.62) calc(100% - var(--fade)*.6),rgba(0,0,0,.36) calc(100% - var(--fade)*.4),rgba(0,0,0,.14) calc(100% - var(--fade)*.2),transparent 100%) 0 calc(var(--wh) - 1px)/100% calc(100% - var(--wh) + 1px) no-repeat}
+.about::after{display:none}
+.about{padding-bottom:clamp(90px,9vw,150px)!important}
+main .schemes-sec.bgsec.sec{margin-top:calc(-1*clamp(40px,4vw,70px))}
+
+/* founder: full colour portrait */
+.fd-photo img{filter:none}
+.fd-photo:hover img{filter:none;transform:translate(-4px,-4px)}
+
+/* approach: surface light at the top, sunlit sand at the bottom, both melting into ivory */
+.approach-sec{--apf:clamp(150px,17vw,280px);background:#0b2a44}
+.approach-bg video{object-position:50% calc(var(--ap,0)*100%)}
+main .approach-sec::before,main .approach-sec::after{content:"";display:block;position:absolute;left:0;right:0;height:var(--apf);z-index:3;pointer-events:none;-webkit-backdrop-filter:none;backdrop-filter:none;-webkit-mask:none;mask:none}
+main .approach-sec::before{top:0;background:linear-gradient(180deg,
+ rgb(250,247,242) 0,
+ rgba(249,243,234,.97) 12%,
+ rgba(247,237,222,.9) 25%,
+ rgba(245,230,208,.76) 38%,
+ rgba(243,222,194,.56) 52%,
+ rgba(242,216,184,.34) 66%,
+ rgba(242,214,182,.15) 81%,
+ rgba(242,214,182,0) 100%)}
+main .approach-sec::after{bottom:0;background:linear-gradient(0deg,
+ rgb(250,247,242) 0,
+ rgba(248,242,233,.97) 12%,
+ rgba(244,234,219,.9) 25%,
+ rgba(239,225,204,.76) 38%,
+ rgba(234,215,190,.56) 52%,
+ rgba(230,207,178,.34) 66%,
+ rgba(227,200,170,.15) 81%,
+ rgba(226,199,170,0) 100%)}
+main .team-sec{padding-bottom:clamp(20px,2.5vw,40px)}
+#portfolio{padding-top:clamp(10px,1.5vw,24px)}
+@media(max-width:900px){.approach-sec{--apf:clamp(110px,26vw,170px)}.approach-bg video{object-position:center center}}
+@media(max-width:900px){.ap-pin{padding-top:clamp(150px,34vw,200px)!important;padding-bottom:clamp(150px,34vw,200px)!important}}

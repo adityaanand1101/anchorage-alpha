@@ -522,16 +522,15 @@ const Legacy = memo(() => {
 const Founder = memo(() => {
   const f = C.founder, sp = useSpot()
   return (
-    <section id="founder" ref={sp} className="sec fx spot">
-      <div className="fx-bg" aria-hidden="true" /><Glow />
-      <div className="wrap fx-in">
-        <div className="fx-fig"><Unveil src={f.img} alt={f.name} className="fx-photo" /></div>
-        <div className="fx-text">
+    <section id="founder" ref={sp} className="sec fd spot">
+      <Glow />
+      <div className="wrap fd-in">
+        <Unveil src={f.img} alt={f.name} className="fd-photo" />
+        <div className="fd-text">
           <Label>{f.role}</Label>
-          <Rv as="h3" className="fx-name">{f.name}</Rv>
-          <span className="fx-rule" aria-hidden="true" />
-          {f.p.map((p, i) => <Rv key={i} as="p" d={140 + i * 140} className={`fx-p ${i === 0 ? 'lead' : ''}`}>{p}</Rv>)}
-          <Rv d={600} className="fx-cred">{f.chips.map(c => <span key={c}>{c}</span>)}</Rv>
+          <Rv as="h3" className="fd-name">{f.name}</Rv>
+          {f.p.map((p, i) => <Rv key={i} as="p" d={120 + i * 120} className={`fd-p ${i === 0 ? 'lead' : ''}`}>{p}</Rv>)}
+          <Rv d={500} className="fd-cred">{f.chips.map(c => <span key={c}>{c}</span>)}</Rv>
         </div>
       </div>
     </section>

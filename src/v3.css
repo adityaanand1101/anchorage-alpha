@@ -666,3 +666,79 @@ main .team-sec{padding-top:clamp(40px,4.5vw,70px)}
 @media(min-aspect-ratio:1280/954) and (min-width:901px){
  .ap-floor{-webkit-mask:linear-gradient(180deg,transparent 0,transparent 56%,rgba(0,0,0,.22) 66%,rgba(0,0,0,.65) 77%,#000 87%);mask:linear-gradient(180deg,transparent 0,transparent 56%,rgba(0,0,0,.22) 66%,rgba(0,0,0,.65) 77%,#000 87%)}
 }
+
+/* ===== v23 ===== */
+/* 1. approach: one continuous column — surface half, deep blue, floor half — scrolling with the copy (no sticky video) */
+.ap-bgtrack{position:absolute;inset:0;z-index:0;overflow:hidden;background:#011d36}
+.ap-v{position:absolute;left:0;right:0;height:min(92svh,74.5vw);pointer-events:none}
+.ap-v .vid{animation:none;transform:none}
+.ap-v .vid video{object-fit:cover!important;-webkit-mask:none!important;mask:none!important}
+.ap-v-top{top:0;-webkit-mask:linear-gradient(180deg,#000 0,#000 52%,rgba(0,0,0,.5) 72%,transparent 100%);mask:linear-gradient(180deg,#000 0,#000 52%,rgba(0,0,0,.5) 72%,transparent 100%)}
+.ap-v-top .vid video{object-position:center top!important}
+.ap-v-bot{bottom:0;-webkit-mask:linear-gradient(0deg,#000 0,#000 52%,rgba(0,0,0,.5) 72%,transparent 100%);mask:linear-gradient(0deg,#000 0,#000 52%,rgba(0,0,0,.5) 72%,transparent 100%)}
+.ap-v-bot .vid video{object-position:center bottom!important}
+@media(max-width:900px){
+ .ap-v{height:min(130vw,640px)}
+ .ap-pin{padding-top:clamp(230px,62vw,330px)!important;padding-bottom:clamp(230px,62vw,330px)!important}
+}
+
+/* 2 + 3. hero -> about: a clean curtain. The hero holds still while About slides over it on a crisp edge; no fog, no grey band */
+.hero-stack{position:relative}
+.hero-stack>.hero{position:sticky;top:0;--ov:0px}
+.hero::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:#06121f;opacity:calc(var(--p,0)*.55)}
+main #about.about2{background:var(--stone);margin-top:0;padding:clamp(64px,6.5vw,104px) var(--gut) clamp(56px,5.5vw,88px);box-shadow:0 -28px 60px -24px rgba(3,12,26,.55)}
+.about2::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(217,188,140,.7) 20%,rgba(217,188,140,.7) 80%,transparent);z-index:1}
+.ab2-veil,.ab2-blur{display:none}
+.ab2-bg{top:0}
+.ab2-bg::before{-webkit-mask:linear-gradient(180deg,rgba(0,0,0,.55) 0,#000 140px,#000 calc(100% - 200px),transparent 100%),linear-gradient(90deg,rgba(0,0,0,.55) 0,rgba(0,0,0,.75) 40%,#000 70%);-webkit-mask-composite:source-in;mask:linear-gradient(180deg,rgba(0,0,0,.55) 0,#000 140px,#000 calc(100% - 200px),transparent 100%),linear-gradient(90deg,rgba(0,0,0,.55) 0,rgba(0,0,0,.75) 40%,#000 70%);mask-composite:intersect}
+.about2 .label{margin-bottom:clamp(1.3rem,2vw,1.9rem)}
+.hv{bottom:clamp(30px,5vh,56px)}
+@media(max-width:860px){main #about.about2{padding:56px var(--gut) 52px}.hv{bottom:18px}.hero-in{padding-bottom:clamp(220px,40vh,300px)}}
+
+/* 4. our people: everyone stays in colour; the hovered leader lifts onto a soft card */
+.team-sec .grid:has(.card:hover) .card:not(:hover) .ph img{filter:none;opacity:1}
+.team-sec .card{position:relative;isolation:isolate;transition:transform .8s var(--ease)}
+.team-sec .card::before{content:"";position:absolute;inset:-12px -12px -16px;z-index:-1;border-radius:10px;background:#fffdf8;border:1px solid rgba(139,107,62,.18);box-shadow:0 30px 50px -30px rgba(40,28,10,.35);opacity:0;transform:scale(.97);transition:opacity .7s ease,transform .8s var(--ease)}
+.team-sec .card:hover,.team-sec .card:focus-visible{transform:translateY(-6px) scale(1.035);z-index:2}
+.team-sec .card:hover::before,.team-sec .card:focus-visible::before{opacity:1;transform:none}
+.team-sec .card:hover .ph img,.team-sec .card:focus-visible .ph img{transform:scale(1.05)}
+@media(hover:none){.team-sec .card:hover{transform:none}.team-sec .card:hover::before{opacity:0}}
+
+/* 5. depth gauge pinned to the points */
+.depth.geo{transform:translate3d(-14px,0,0);height:auto}
+.depth.geo.on{transform:translate3d(0,0,0)}
+.depth.geo .d-tick em{top:-6px}
+
+/* 6. FAQs and policies: single generous column */
+.faq-cols{display:block;max-width:960px}
+.faq-cols .faq-list+.faq-list .faq:first-child{border-top:0}
+.faq-cols .faq-list:first-child .faq:last-child{border-bottom:0}
+.faq-cols .faq-list:last-child .faq:last-child{border-bottom:1px solid var(--rule)}
+.faq>button{padding:20px 0;font-size:18px;min-height:66px}
+.ans p{font-size:15.5px;line-height:1.75;padding:0 3rem 22px 0}
+.pol-grid{display:block;max-width:960px;border-bottom:0}
+.pol-grid .pol{padding:24px 0;gap:2.4rem}
+.pol-grid .pol:last-child{border-bottom:1px solid var(--rule)}
+.pol h3{font-size:18px}
+.pol p{font-size:15.5px;line-height:1.6;margin-top:6px;max-width:60ch}
+.pol-act{flex-direction:row-reverse;align-items:center;gap:20px}
+.pol-act small{font-size:13px;white-space:nowrap}
+.pol .dl{padding:11px 20px;border:1px solid var(--bronze);border-radius:0;color:var(--bronze);font-size:15px;transition:background .4s,color .4s}
+.pol .dl:hover{background:var(--bronze);color:#fff;border-color:var(--bronze)}
+#investors .panel .note.first{max-width:960px}
+@media(max-width:560px){.pol-act{flex-direction:row-reverse;justify-content:flex-end}.faq>button{font-size:16px;min-height:0}}
+main #about.about2{padding-bottom:clamp(36px,3.5vw,56px)}
+.ab2-bg{background:linear-gradient(180deg,var(--stone),var(--stone) 70%,var(--ivory))}
+.ab2-bg::before{-webkit-mask:linear-gradient(180deg,rgba(0,0,0,.55) 0,#000 140px,#000 calc(100% - 120px),transparent 100%),linear-gradient(90deg,rgba(0,0,0,.55) 0,rgba(0,0,0,.75) 40%,#000 70%);-webkit-mask-composite:source-in;mask:linear-gradient(180deg,rgba(0,0,0,.55) 0,#000 140px,#000 calc(100% - 120px),transparent 100%),linear-gradient(90deg,rgba(0,0,0,.55) 0,rgba(0,0,0,.75) 40%,#000 70%);mask-composite:intersect}
+main .schemes-sec.bgsec.sec{padding-top:clamp(28px,3vw,48px)}
+
+/* ===== v24: founder centred on mobile ===== */
+@media(max-width:860px){
+ .fd2{justify-items:center;text-align:center}
+ .fd2-photo{width:100%;max-width:280px;margin-inline:auto}
+ .fd2-text{display:flex;flex-direction:column;align-items:center}
+ .fd2-text .label{justify-content:center;flex-wrap:wrap;gap:10px 14px;text-align:center}
+ .fd2-text .label i{display:none}
+ .fd2-p{text-align:center;margin-inline:auto}
+ .fd2 .fd-cred{justify-content:center}
+}

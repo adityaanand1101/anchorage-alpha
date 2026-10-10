@@ -583,10 +583,8 @@ function Team() {
 const Approach = memo(() => (
   <section id="approach" className="dark approach-sec" data-step="0">
     <div className="ap-bgtrack" aria-hidden="true">
-      <div className="ap-bgpin">
-        <div className="approach-bg"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /><div className="ap-floor"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /></div></div>
-        <div className="approach-scrim" />
-      </div>
+      <div className="ap-v ap-v-top"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /></div>
+      <div className="ap-v ap-v-bot"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /></div>
     </div>
     <div className="ap-track">
       <div className="ap-pin">
@@ -1005,8 +1003,10 @@ export default function App() {
       <a className="a11y-skip" href="#a11y-main">Skip to main content</a>
       <Nav active={active} solid={solid} />
       <main id="a11y-main" tabIndex={-1}>
-        <Hero />
-        <About />
+        <div className="hero-stack">
+          <Hero />
+          <About />
+        </div>
         <Schemes />
         <Legacy />
         <Team />

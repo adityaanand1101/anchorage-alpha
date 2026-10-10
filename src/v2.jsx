@@ -10,12 +10,14 @@ export const Split = ({ text, as: T = 'h2', className = '', seenRef }) => {
 }
 
 /* Depth gauge: steps down through six stops, one per approach point */
-const STOPS = [1000, 2500, 4000, 6000, 8000, 10000]
+const STOPS = [0, 2000, 4000, 6000, 8000, 10000]
 const posOf = i => 8 + i * (84 / 5)
 export function DepthMeter() {
   const [step, setStep] = useState(0)
   const [on, setOn] = useState(false)
   const [shown, setShown] = useState(STOPS[0])
+  const [geo, setGeo] = useState(null)
+  const geoRef = useRef(null)
   const cur = useRef(STOPS[0])
   useEffect(() => {
     const el = document.getElementById('approach')
@@ -38,6 +40,15 @@ export function DepthMeter() {
       el.dataset.step = s
       const pv = pinned ? Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh))) : 0
       el.style.setProperty('--ap', pv.toFixed(4))
+      /* align the gauge to the six points: first tick on the centre of point 1, last on the centre of point 6 */
+      const items = pinned && window.innerWidth > 900 ? el.querySelectorAll('.ap-item') : []
+      if (items.length === STOPS.length) {
+        const c = Array.from(items, li => { const q = li.getBoundingClientRect(); return q.top + q.height / 2 })
+        const top = c[0], h = Math.max(1, c[c.length - 1] - c[0])
+        const g = { top: Math.round(top), h: Math.round(h), pos: c.map(y => ((y - top) / h) * 100) }
+        const o = geoRef.current
+        if (!o || Math.abs(o.top - g.top) > 0.5 || Math.abs(o.h - g.h) > 0.5) { geoRef.current = g; setGeo(g) }
+      } else if (geoRef.current) { geoRef.current = null; setGeo(null) }
       setOn(vis); setStep(s)
     }
     const h = () => { if (!raf) raf = requestAnimationFrame(f) }
@@ -57,13 +68,13 @@ export function DepthMeter() {
     return () => cancelAnimationFrame(raf)
   }, [step])
   const fmt = n => n.toLocaleString('en-US')
+  const P = i => geo ? geo.pos[i] : posOf(i)
   return (
-    <div className={`depth ${on ? 'on' : ''}`} aria-hidden="true">
+    <div className={`depth ${on ? 'on' : ''} ${geo ? 'geo' : ''}`} aria-hidden="true" style={geo ? { top: geo.top + 'px', height: geo.h + 'px' } : undefined}>
       <div className="d-track">
-        <span className="d-tick" style={{ top: '0%' }}><em>0 m</em></span>
-        {STOPS.map((m, i) => <span key={m} className={`d-tick ${i === step ? 'act' : ''} ${i < step ? 'past' : ''}`} style={{ top: posOf(i) + '%' }}><em>{fmt(m)} m</em></span>)}
-        <i className="d-fill" style={{ height: posOf(step) + '%' }} />
-        <b className="d-mk" style={{ top: posOf(step) + '%' }}><span>{fmt(shown)} m</span></b>
+        {STOPS.map((m, i) => <span key={m} className={`d-tick ${i === step ? 'act' : ''} ${i < step ? 'past' : ''}`} style={{ top: P(i) + '%' }}><em>{fmt(m)} m</em></span>)}
+        <i className="d-fill" style={{ height: P(step) + '%' }} />
+        <b className="d-mk" style={{ top: P(step) + '%' }}><span>{fmt(shown)} m</span></b>
       </div>
     </div>
   )

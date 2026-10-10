@@ -24,12 +24,20 @@ export function DepthMeter() {
     const f = () => {
       raf = 0
       const r = el.getBoundingClientRect(), vh = window.innerHeight
-      const vis = r.top < vh * 0.12 && r.bottom > vh * 0.7
-      const pinned = getComputedStyle(el.firstElementChild).position === 'sticky'
-      const p = pinned ? Math.min(0.999, Math.max(0, (-r.top) / Math.max(1, r.height - vh))) : 0
+      const pin = el.querySelector('.ap-pin'), track = el.querySelector('.ap-track')
+      const pinned = pin && getComputedStyle(pin).position === 'sticky'
+      const pr = pin ? pin.getBoundingClientRect() : r
+      const vis = pr.top < vh * 0.12 && pr.bottom > vh * 0.7
+      let p = 0
+      if (pinned && track) {
+        const cs = getComputedStyle(track), t = parseFloat(cs.paddingTop) || 0, b = parseFloat(cs.paddingBottom) || 0
+        const tr = track.getBoundingClientRect()
+        p = Math.min(0.999, Math.max(0, (-(tr.top + t)) / Math.max(1, tr.height - t - b - vh)))
+      }
       const s = Math.min(5, Math.floor(p * 6))
       el.dataset.step = s
-      el.style.setProperty('--ap', p.toFixed(4))
+      const pv = pinned ? Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh))) : 0
+      el.style.setProperty('--ap', pv.toFixed(4))
       setOn(vis); setStep(s)
     }
     const h = () => { if (!raf) raf = requestAnimationFrame(f) }

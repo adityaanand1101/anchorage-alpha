@@ -457,13 +457,16 @@ const Hero = memo(() => (
 const About = memo(() => {
   const a = C.about, k = useSeen(), sp = useSpot()
   return (
-    <section id="about" ref={sp} className="sec bgsec about spot">
-      <div className="bg" aria-hidden="true"><Glow /></div>
-      <i className="ab-blur b1" aria-hidden="true" /><i className="ab-blur b2" aria-hidden="true" /><i className="ab-blur b3" aria-hidden="true" />
-      <div className="wrap">
+    <section id="about" ref={sp} className="about2 spot">
+      <div className="ab2-bg" aria-hidden="true"><Glow /></div>
+      <div className="ab2-blur" aria-hidden="true" />
+      <div className="ab2-veil" aria-hidden="true" />
+      <div className="wrap ab2-in">
         <Label>About us</Label>
-        <Split text={a.h} className="h2" seenRef={k} />
-        <div className="ab-copy">{a.p.map((p, i) => <Rv key={i} as="p" d={500 + 160 * i} className="lede blurin" {...html(p)} />)}</div>
+        <div className="ab2-grid">
+          <Split text={a.h} className="h2 ab2-h" seenRef={k} />
+          <div className="ab2-copy">{a.p.map((p, i) => <Rv key={i} as="p" d={450 + 160 * i} className="ab2-p" {...html(p)} />)}</div>
+        </div>
       </div>
     </section>
   )
@@ -503,8 +506,8 @@ const Schemes = memo(() => {
 const Legacy = memo(() => {
   const l = C.legacy, k = useSeen()
   return (
-    <section id="legacy" className="sec bgsec legacy-sec">
-      <div className="bg" aria-hidden="true" />
+    <section id="legacy" className="sec bgsec legacy-sec lg2">
+      <div className="lg-bg" aria-hidden="true" />
       <div className="wrap">
         <div className="panel-g">
           <Label>Legacy</Label>
@@ -514,28 +517,26 @@ const Legacy = memo(() => {
         </div>
         <div className="stats">{l.stats.map((s, i) => <div key={i} className="stat"><Count html={s.b} /><span>{s.s}</span>{s.e && <em>{s.e}</em>}</div>)}</div>
         <p className="note">* Assets under management of the sponsor group and the Kothari family office, including listed and unlisted holdings.</p>
+        <Founder />
       </div>
     </section>
   )
 })
 
-const Founder = memo(() => {
-  const f = C.founder, sp = useSpot()
+const Founder = () => {
+  const f = C.founder
   return (
-    <section id="founder" ref={sp} className="sec fd spot">
-      <Glow />
-      <div className="wrap fd-in">
-        <Unveil src={f.img} alt={f.name} className="fd-photo" />
-        <div className="fd-text">
-          <Label>{f.role}</Label>
-          <Rv as="h3" className="fd-name">{f.name}</Rv>
-          {f.p.map((p, i) => <Rv key={i} as="p" d={120 + i * 120} className={`fd-p ${i === 0 ? 'lead' : ''}`}>{p}</Rv>)}
-          <Rv d={500} className="fd-cred">{f.chips.map(c => <span key={c}>{c}</span>)}</Rv>
-        </div>
+    <div id="founder" className="fd2">
+      <Unveil src={f.img} alt={f.name} className="fd2-photo" />
+      <div className="fd2-text">
+        <Label>{f.role}</Label>
+        <Rv as="h3" className="fd2-name">{f.name}</Rv>
+        {f.p.map((p, i) => <Rv key={i} as="p" d={120 + i * 120} className="fd2-p">{p}</Rv>)}
+        <Rv d={500} className="fd-cred">{f.chips.map(c => <span key={c}>{c}</span>)}</Rv>
       </div>
-    </section>
+    </div>
   )
-})
+}
 
 function Team() {
   const [p, setP] = useState(null)
@@ -557,7 +558,7 @@ function Team() {
       <div className="wrap">
         <Label>Team</Label>
         <div className="head2">
-          <Rv as="h2" className="h2">One shared network.<sup>*</sup></Rv>
+          <Rv as="h2" className="h2">Our People<sup>*</sup></Rv>
           <Rv as="p" d={120} className="lede">Led by Rohit Kothari, Founder &amp; Executive Chairman, our specialists cover every major sector.</Rv>
         </div>
         <div className="grid">{C.team.members.map((m, i) => (
@@ -571,7 +572,7 @@ function Team() {
         <div className="veil" onClick={() => setP(null)} />
         <aside role="dialog" aria-label={p?.name} ref={panel} data-lenis-prevent>
           {p && <><button className="x" onClick={() => setP(null)}>Close</button>
-            <img src={p.img} alt={p.name} /><h3 className="h3">{p.name}</h3><p className="role" {...html(p.role)} />
+            <figure className="tm-ph"><img src={p.img} alt={p.name} /></figure><div className="tm-id"><h3 className="h3">{p.name}</h3><p className="role" {...html(p.role)} /></div>
             <dl>{p.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></>}
         </aside>
       </div>
@@ -581,13 +582,19 @@ function Team() {
 
 const Approach = memo(() => (
   <section id="approach" className="dark approach-sec" data-step="0">
-    <div className="ap-pin">
-      <div className="approach-bg" aria-hidden="true"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /></div>
-      <div className="approach-scrim" aria-hidden="true" />
-      <div className="wrap ap-in">
-        <div className="ap-head"><Label>Approach</Label><Rv as="h2" className="h2">How we invest.</Rv></div>
-        <ol className="ap-list">{C.approach.map((a, i) => (
-          <Rv as="li" key={i} d={i * 90} className="ap-item"><div><h3>{a.h}</h3><p>{a.p}</p></div></Rv>))}</ol>
+    <div className="ap-bgtrack" aria-hidden="true">
+      <div className="ap-bgpin">
+        <div className="approach-bg"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /><div className="ap-floor"><LoopVideo src="/video/approach.mp4" poster="/video/approach-poster.jpg" /></div></div>
+        <div className="approach-scrim" />
+      </div>
+    </div>
+    <div className="ap-track">
+      <div className="ap-pin">
+        <div className="wrap ap-in">
+          <div className="ap-head"><Label>Our approach</Label><Rv as="h2" className="h2">A Deeper Perspective</Rv></div>
+          <ol className="ap-list">{C.approach.map((a, i) => (
+            <Rv as="li" key={i} d={i * 90} className="ap-item"><div><h3>{a.h}</h3><p>{a.p}</p></div></Rv>))}</ol>
+        </div>
       </div>
     </div>
   </section>
@@ -733,7 +740,7 @@ function Investors() {
 
   return (
     <section id="investors" className="sec tint">
-      <div className="wrap narrow">
+      <div className="wrap inv2">
         <Label>Investors</Label>
         <Rv as="h2" className="h2">Investor information</Rv>
         <div className="tabs" role="tablist" aria-label="Investor information" onKeyDown={onKey}>
@@ -754,22 +761,24 @@ function Investors() {
           <span className="ind" aria-hidden="true" style={{ transform: `translateX(${ind.x}px)`, width: ind.w }} />
         </div>
         <div className="panel" id={`panel-${t}`} role="tabpanel" aria-labelledby={`tab-${t}`} tabIndex={0} key={t}>
-          {t === 0 && <div className="faq-list">{C.faq.map((f, i) => {
-            const on = qs.has(i)
-            return (
-              <div key={i} className={`faq ${on ? 'on' : ''}`}>
-                <button id={`faq-q-${i}`} aria-expanded={on} aria-controls={`faq-a-${i}`} onClick={() => toggle(i)}>
-                  <span>{f.q}</span><i aria-hidden="true" />
-                </button>
-                <div className="ans" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>
-                  <div><p {...html(f.a)} /></div>
+          {t === 0 && <div className="faq-cols">{[0, 1].map(col => (
+            <div key={col} className="faq-list">{C.faq.map((f, i) => {
+              if ((i < Math.ceil(C.faq.length / 2)) !== (col === 0)) return null
+              const on = qs.has(i)
+              return (
+                <div key={i} className={`faq ${on ? 'on' : ''}`}>
+                  <button id={`faq-q-${i}`} aria-expanded={on} aria-controls={`faq-a-${i}`} onClick={() => toggle(i)}>
+                    <span>{f.q}</span><i aria-hidden="true" />
+                  </button>
+                  <div className="ans" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>
+                    <div><p {...html(f.a)} /></div>
+                  </div>
                 </div>
-              </div>
-            )
-          })}</div>}
+              )
+            })}</div>))}</div>}
           {t === 1 && <>
             <p className="note first">Policies of Anchorage Capital and its schemes, available to download as PDF.</p>
-            {C.pol.map(p => (
+            <div className="pol-grid">{C.pol.map(p => (
               <div key={p.t} className="pol">
                 <div><h3>{p.t}</h3><p>{p.d}</p></div>
                 <div className="pol-act">
@@ -781,7 +790,7 @@ function Investors() {
                   <small>{p.meta}</small>
                 </div>
               </div>
-            ))}
+            ))}</div>
           </>}
           {t === 2 && <>
             <p className="note first">{C.defs.note}</p>
@@ -1000,7 +1009,6 @@ export default function App() {
         <About />
         <Schemes />
         <Legacy />
-        <Founder />
         <Team />
         <Approach />
         <Portfolio />

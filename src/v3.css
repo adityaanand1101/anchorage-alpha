@@ -354,3 +354,24 @@ main .approach-sec::after{height:clamp(170px,20vw,320px);z-index:3;background:li
 @media(max-width:860px){.fd{padding:44px var(--gut) 56px}.fd-in.wrap{grid-template-columns:1fr;gap:34px}.fd-photo{max-width:260px;margin-right:14px}}
 .fd{display:block!important;min-height:0}
 .fd-text{max-width:640px}.fd-p,.fd-p.lead{max-width:none}
+
+/* ===== v17 ===== */
+/* logo + tagline: opacity/transform only (no animated blur/filter) */
+@keyframes softIn{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+.hero-logo{filter:none;animation:softIn 2.2s 1s cubic-bezier(.25,.8,.25,1) both;will-change:opacity,transform;backface-visibility:hidden}
+.hero-line{animation:softIn 2.2s 1.7s cubic-bezier(.25,.8,.25,1) both;will-change:opacity,transform;backface-visibility:hidden}
+
+/* approach: video exactly as supplied, soft local scrim behind the text only */
+.approach-bg video{transform:translate3d(0,0,0);object-position:center center}
+main .approach-sec::before,main .approach-sec::after{content:none;display:none}
+main .approach-sec .approach-scrim{background:radial-gradient(34% 46% at 28% 50%,rgba(5,16,32,.38),transparent 100%),radial-gradient(34% 52% at 74% 50%,rgba(5,16,32,.42),transparent 100%)}
+@media(max-width:900px){.approach-bg video{transform:none}main .approach-sec .approach-scrim{background:linear-gradient(180deg,rgba(5,16,32,.45),rgba(5,16,32,.3))}}
+
+/* hero -> about: the sea washes to pale haze first, marble then rises over the haze (no muddy grey) */
+.about::before{display:block;content:"";position:absolute;left:0;right:0;top:0;height:var(--wh);z-index:1;pointer-events:none;
+ background:linear-gradient(180deg,rgba(251,247,239,0) 0,rgba(251,247,239,.03) 8%,rgba(251,247,239,.1) 20%,rgba(251,247,239,.24) 33%,rgba(251,247,239,.44) 46%,rgba(251,247,239,.66) 60%,rgba(251,247,239,.84) 74%,rgba(251,247,239,.95) 87%,rgb(251,247,239) 100%)}
+.about>.bg{z-index:2;-webkit-mask:linear-gradient(180deg,transparent 0,transparent 38%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.2) 62%,rgba(0,0,0,.5) 76%,rgba(0,0,0,.82) 90%,#000 100%) 0 0/100% var(--wh) no-repeat,linear-gradient(#000,#000) 0 calc(var(--wh) - 1px)/100% 100% no-repeat;mask:linear-gradient(180deg,transparent 0,transparent 38%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.2) 62%,rgba(0,0,0,.5) 76%,rgba(0,0,0,.82) 90%,#000 100%) 0 0/100% var(--wh) no-repeat,linear-gradient(#000,#000) 0 calc(var(--wh) - 1px)/100% 100% no-repeat}
+.ab-blur{z-index:0}
+.ab-blur.b1{height:var(--wh)}.ab-blur.b2{height:var(--wh)}.ab-blur.b3{height:var(--wh)}
+.about .wrap{z-index:3}
+main .approach-sec .approach-scrim{background:radial-gradient(34% 46% at 28% 50%,rgba(5,16,32,.38),transparent 100%),radial-gradient(38% 62% at 74% 60%,rgba(5,16,32,.55),transparent 100%)}
